@@ -590,6 +590,10 @@ void main(void)
     sys_info_init();
     clear_all_event();
     flush_all_msg();
+#if defined(USE_AMP_MODE_SELECT_FOR_NS4160)
+	NS4160_AMP_GPIO_INIT();
+	D_CLASS_AMP_SEL();
+#endif	
 #ifdef MICPHONE_GPIO_DETECTION
 	mic_online=0;
 #endif
