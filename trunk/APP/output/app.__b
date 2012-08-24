@@ -1,0 +1,4 @@
+TRANSFER
+".\output\entry.obj",
+".\output\pll_set.obj" 
+TO ".\output\app.LIB"

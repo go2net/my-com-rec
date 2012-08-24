@@ -1,0 +1,1141 @@
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     1
+
+
+MACRO ASSEMBLER AX51 V3.06h
+OBJECT MODULE PLACED IN .\output\entry.obj
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\AX51.EXE lib\entry.A51 INCDIR(.\display;.\main;.\music;.\rtc;.\usb_device;.\fm_rec
+                      eive;.\key;.\aux_fun;.\lib;.\msg;.\iic;.\aux_fun;.\usb_device;.\output) SET(SMALL) DEBUG PRINT(.\o
+                      utput\entry.lst) OBJECT(.\output\entry.obj) EP
+
+LOC    OBJ             LINE     SOURCE
+
+                          1     $nomod51 
+                          2                     NAME    MASKROM_ENTRY_SECTION
+                          3     ;#include "AC309N.h"
+                    +1    4     
+                    +1    5     
+                    +1    6     
+                    +1    7     
+                    +1    8     
+                    +1    9     
+                    +1   10     
+                    +1   11     
+                    +1   12     
+                    +1   13     
+                    +1   14     
+                    +1   15     
+                    +1   16     
+                    +1   17     
+  0080              +1   18     sfr P0 = 0x80;
+  0081              +1   19     sfr SP = 0x81;
+  0082              +1   20     sfr DP0L = 0x82;
+  0083              +1   21     sfr DP0H = 0x83;
+  0084              +1   22     sfr CLKCON1 = 0x84;
+  0085              +1   23     sfr CLKGAT = 0x85;
+  0086              +1   24     sfr CLKCON0 = 0x86;
+  0087              +1   25     sfr PCON = 0x87;
+  0088              +1   26     sfr DPCON = 0x88;
+  0089              +1   27     sfr SPH = 0x89;
+  008A              +1   28     sfr DP1L = 0x8A;
+  008B              +1   29     sfr DP1H = 0x8B;
+  008C              +1   30     sfr BANKSEL = 0x8C;
+  008D              +1   31     sfr P4DIR = 0x8D;
+  008E              +1   32     sfr P4PU = 0x8E;
+  008F              +1   33     sfr P5PU = 0x8F;
+  0090              +1   34     sfr P1 = 0x90;
+  0091              +1   35     sfr SINT = 0x91;
+  0092              +1   36     sfr P0PD = 0x92;
+  0093              +1   37     sfr P1PD = 0x93;
+  0094              +1   38     sfr P2PD = 0x94;
+  0095              +1   39     sfr P3PD = 0x95;
+  0096              +1   40     sfr IRTCON = 0x96;
+  0097              +1   41     sfr IRTBUF = 0x97;
+  0098              +1   42     sfr P5 = 0x98;
+  0099              +1   43     sfr ADCDATL = 0x99;
+  009A              +1   44     sfr ADCDATH = 0x9A;
+  0099              +1   45     sfr PLLCON0 = 0x99;
+  009A              +1   46     sfr PLLCON1 = 0x9A;
+  009B              +1   47     sfr ADCCON = 0x9B;
+  009C              +1   48     sfr P4PD = 0x9C;
+  009D              +1   49     sfr IICCON = 0x9D;
+  009E              +1   50     sfr IICSTA = 0x9E;
+  009F              +1   51     sfr IICBUF = 0x9F;
+  00A0              +1   52     sfr P2 = 0xA0;
+  00A1              +1   53     sfr T0CON = 0xA1;
+  00A2              +1   54     sfr IP0H = 0xA2;
+  00A3              +1   55     sfr T0CNT = 0xA3;
+  00A4              +1   56     sfr DACCON0 = 0xA4;
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     2
+
+  00A5              +1   57     sfr T0PWM = 0xA5;
+  00A6              +1   58     sfr T2PWML = 0xA6;
+  00A7              +1   59     sfr T2PWMH = 0xA7;
+  00A8              +1   60     sfr IE0 = 0xA8;
+  00A9              +1   61     sfr IE1 = 0xA9;
+  00AA              +1   62     sfr T2CNTL = 0xAA;
+  00AB              +1   63     sfr T2CNTH = 0xAB;
+  00AC              +1   64     sfr DACCON2 = 0xAC;
+  00AD              +1   65     sfr T2CON = 0xAD;
+  00AE              +1   66     sfr CKCPRDL = 0xAE;
+  00AF              +1   67     sfr CKCPRDH = 0xAF;
+  00B0              +1   68     sfr P3 = 0xB0;
+  00B1              +1   69     sfr T1CON = 0xB1;
+  00B2              +1   70     sfr IP1H = 0xB2;
+  00B3              +1   71     sfr T1CNT = 0xB3;
+  00B4              +1   72     sfr DACCON1 = 0xB4;
+  00B5              +1   73     sfr T1PWM = 0xB5;
+  00B6              +1   74     sfr T3PWML = 0xB6;
+  00B7              +1   75     sfr T3PWMH = 0xB7;
+  00B8              +1   76     sfr IP0 = 0xB8;
+  00B9              +1   77     sfr IP1 = 0xB9;
+  00BA              +1   78     sfr T3CNTL = 0xBA;
+  00BB              +1   79     sfr T3CNTH = 0xBB;
+  00BC              +1   80     sfr DACCON3 = 0xBC;
+  00BD              +1   81     sfr T3CON = 0xBD;
+  00BE              +1   82     sfr CKCBEN = 0xBE;
+  00BF              +1   83     sfr CKCCON = 0xBF;
+  00C0              +1   84     sfr ADSPPND = 0xC0;
+  00C1              +1   85     sfr P5DIR = 0xC1;
+  00C2              +1   86     sfr P0HD = 0xC2;
+  00C3              +1   87     sfr P1HD = 0xC3;
+  00C4              +1   88     sfr P2HD = 0xC4;
+  00C5              +1   89     sfr P3HD = 0xC5;
+  00C6              +1   90     sfr P4HD = 0xC6;
+  00C7              +1   91     sfr P5HD = 0xC7;
+  00C8              +1   92     sfr USBCON0 = 0xC8;
+  00D0              +1   93     sfr PSW = 0xD0;
+  00D1              +1   94     sfr SPICON = 0xD1;
+  00D2              +1   95     sfr P5PD = 0xD2;
+  00D3              +1   96     sfr SPIBUF = 0xD3;
+  00D4              +1   97     sfr SPIDMACON = 0xD4;
+  00D5              +1   98     sfr SPIDMACNT = 0xD5;
+  00D6              +1   99     sfr SPIDMAADR = 0xD6;
+  00E0              +1  100     sfr ACC = 0xE0;
+  00E4              +1  101     sfr P0DIR = 0xE4;
+  00E5              +1  102     sfr P1DIR = 0xE5;
+  00E6              +1  103     sfr P2DIR = 0xE6;
+  00E7              +1  104     sfr P3DIR = 0xE7;
+  00E8              +1  105     sfr P4 = 0xE8;
+  00EA              +1  106     sfr UTCON = 0xEA;
+  00EB              +1  107     sfr UTSTA = 0xEB;
+  00EC              +1  108     sfr UTBUF = 0xEC;
+  00ED              +1  109     sfr IE2 = 0xED;
+  00F0              +1  110     sfr B = 0xF0;
+  00F1              +1  111     sfr EMICON = 0xF1;
+  00F2              +1  112     sfr EMIBUF = 0xF2;
+  00F3              +1  113     sfr CRCFIFO = 0xF3;
+  00F4              +1  114     sfr P0PU = 0xF4;
+  00F5              +1  115     sfr P1PU = 0xF5;
+  00F6              +1  116     sfr P2PU = 0xF6;
+  00F7              +1  117     sfr P3PU = 0xF7;
+                    +1  118     
+                    +1  119     
+  00FA              +1  120     sfr CRCREGL = 0xFA;
+  00FB              +1  121     sfr CRCREGH = 0xFB;
+                    +1  122     
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     3
+
+  00E9              +1  123     sfr USBCON2 = 0xE9;
+                    +1  124     
+                    +1  125     
+00D0.7              +1  126     sbit CY    = 0xD7;
+00D0.6              +1  127     sbit AC    = 0xD6;
+00D0.5              +1  128     sbit F0    = 0xD5;
+00D0.4              +1  129     sbit RS1   = 0xD4;
+00D0.3              +1  130     sbit RS0   = 0xD3;
+00D0.2              +1  131     sbit OV    = 0xD2;
+00D0.0              +1  132     sbit P     = 0xD0;
+                    +1  133     
+                    +1  134     
+0080.0              +1  135     sbit P00 = P0 ^ 0;
+0080.1              +1  136     sbit P01 = P0 ^ 1;
+0080.2              +1  137     sbit P02 = P0 ^ 2;
+0080.3              +1  138     sbit P03 = P0 ^ 3;
+0080.4              +1  139     sbit P04 = P0 ^ 4;
+0080.5              +1  140     sbit P05 = P0 ^ 5;
+0080.6              +1  141     sbit P06 = P0 ^ 6;
+0080.7              +1  142     sbit P07 = P0 ^ 7;
+                    +1  143     
+0090.0              +1  144     sbit P10 = P1 ^ 0;
+0090.1              +1  145     sbit P11 = P1 ^ 1;
+0090.2              +1  146     sbit P12 = P1 ^ 2;
+0090.3              +1  147     sbit P13 = P1 ^ 3;
+0090.4              +1  148     sbit P14 = P1 ^ 4;
+0090.5              +1  149     sbit P15 = P1 ^ 5;
+0090.6              +1  150     sbit P16 = P1 ^ 6;
+0090.7              +1  151     sbit P17 = P1 ^ 7;
+                    +1  152     
+                    +1  153     
+00A0.0              +1  154     sbit P20 = P2 ^ 0;
+00A0.1              +1  155     sbit P21 = P2 ^ 1;
+00A0.2              +1  156     sbit P22 = P2 ^ 2;
+00A0.3              +1  157     sbit P23 = P2 ^ 3;
+00A0.4              +1  158     sbit P24 = P2 ^ 4;
+00A0.5              +1  159     sbit P25 = P2 ^ 5;
+00A0.6              +1  160     sbit P26 = P2 ^ 6;
+00A0.7              +1  161     sbit P27 = P2 ^ 7;
+                    +1  162     
+                    +1  163     
+00B0.0              +1  164     sbit P30 = P3 ^ 0;
+00B0.1              +1  165     sbit P31 = P3 ^ 1;
+00B0.2              +1  166     sbit P32 = P3 ^ 2;
+00B0.3              +1  167     sbit P33 = P3 ^ 3;
+00B0.4              +1  168     sbit P34 = P3 ^ 4;
+00B0.5              +1  169     sbit P35 = P3 ^ 5;
+00B0.6              +1  170     sbit P36 = P3 ^ 6;
+00B0.7              +1  171     sbit P37 = P3 ^ 7;
+                    +1  172     
+                    +1  173     
+00E8.0              +1  174     sbit P40 = P4 ^ 0;
+00E8.1              +1  175     sbit P41 = P4 ^ 1;
+00E8.2              +1  176     sbit P42 = P4 ^ 2;
+00E8.3              +1  177     sbit P43 = P4 ^ 3;
+00E8.4              +1  178     sbit P44 = P4 ^ 4;
+00E8.5              +1  179     sbit P45 = P4 ^ 5;
+00E8.6              +1  180     sbit P46 = P4 ^ 6;
+00E8.7              +1  181     sbit P47 = P4 ^ 7;
+                    +1  182     
+                    +1  183     
+0088.0              +1  184     sbit DPSEL = DPCON ^ 0;
+0088.3              +1  185     sbit DSP_TOGGLE = DPCON ^3;
+                    +1  186     
+                    +1  187     
+                    +1  188     
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     4
+
+                    +1  189     
+                    +1  190     
+00A8.0              +1  191     sbit ET0  = IE0 ^0;
+00A8.1              +1  192     sbit ET1  = IE0 ^1;
+00A8.2              +1  193     sbit ET2  = IE0 ^2;
+00A8.3              +1  194     sbit ET3  = IE0 ^3;
+00A8.4              +1  195     sbit ESPI = IE0 ^4;
+00A8.5              +1  196     sbit EIIC = IE0 ^5;
+00A8.6              +1  197     sbit ESFT = IE0 ^6;
+00A8.7              +1  198     sbit EA   = IE0 ^7;
+                    +1  199     
+                    +1  200     
+00B8.0              +1  201     sbit PT0  = IP0 ^0;
+00B8.1              +1  202     sbit PT1  = IP0 ^1;
+00B8.2              +1  203     sbit PT2  = IP0 ^2;
+00B8.3              +1  204     sbit PT3  = IP0 ^3;
+00B8.4              +1  205     sbit PSPI = IP0 ^4;
+00B8.5              +1  206     sbit PIIC = IP0 ^5;
+00B8.6              +1  207     sbit PSFT = IP0 ^6;
+00B8.7              +1  208     sbit PUART = IP0 ^7;
+                    +1  209     
+                    +1  210     
+                    +1  211     
+                    +1  212     
+                    +1  213     
+                    +1  214     
+                    +1  215     
+                    +1  216     
+                    +1  217     
+                    +1          
+                    +1          
+                    +1  220     
+                    +1  221     
+                    +1  222     
+                    +1  223     
+                    +1  224     
+                    +1  225     
+                    +1  226     
+                    +1  227     
+                    +1  228     
+                    +1  229     
+                    +1  230     
+                    +1  231     
+                    +1  232     
+                    +1  233     
+                    +1  234     
+                    +1  235     
+                    +1  236     
+                    +1  237     
+                    +1  238     
+                    +1  239     
+                    +1  240     
+                    +1  241     
+                    +1          
+                    +1          
+                    +1          
+                    +1  245     
+                        246     
+                        247     
+                        248     
+                        249     MASKROM_FUN             MACRO           con, mn, fn
+                        250     ?PR?&fn&?&mn    SEGMENT         CODE
+                        251                                     RSEG            ?PR?&fn&?&mn
+                        252     public fn
+                        253     fn:
+                        254         MOV    A, #con
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     5
+
+                        255         JMP    MASKROM_JMP_TABLE
+                        256     ENDM
+                        257     
+                        258     BSP_FUN             MACRO               con, mn, fn
+                        259     ?PR?&fn&?&mn    SEGMENT         CODE
+                        260                                     RSEG            ?PR?&fn&?&mn
+                        261     public fn
+                        262     fn:
+                        263         MOV    A, #con
+                        264         JMP    BSP_JMP_TABLE
+                        265     ENDM
+                        266     
+                        267                                                             
+                        268     MASKROM_LIB             MACRO           Base,offset,fn                         
+                        269     public fn                                               
+                        270     fn  CODE   (Base + offset) 
+                        271     ENDM
+                        272     
+ 9000                   273     MASKROM_JMP_TABLE                               EQU                     0x9000
+ 7F7F                   274     BSP_JMP_TABLE                   EQU         (0x7fff - 128)
+                        275     
+ 961B                   276     LibBase     CODE   (MASKROM_JMP_TABLE + 0x1B + 0x600)        ; Base address for Library 
+                               Entries in BOOT
+00961B                  277     CSEG AT LibBase
+                        278+1   MASKROM_LIB     LibBase    ,0      ,?C?CLDPTR    
+                        281+1   MASKROM_LIB     LibBase    ,3      ,?C?CLDOPTR   
+                        284+1   MASKROM_LIB     LibBase    ,6      ,?C?CSTPTR    
+                        287+1   MASKROM_LIB     LibBase    ,9      ,?C?IMUL      
+                        290+1   MASKROM_LIB     LibBase    ,12     ,?C?UIDIV     
+                        293+1   MASKROM_LIB     LibBase    ,15     ,?C?IILDX     
+                        296+1   MASKROM_LIB     LibBase    ,18     ,?C?ILDOPTR   
+                        299+1   MASKROM_LIB     LibBase    ,21     ,?C?LADD      
+                        302+1   MASKROM_LIB     LibBase    ,24     ,?C?LSUB      
+                        305+1   MASKROM_LIB     LibBase    ,27     ,?C?LMUL      
+                        308+1   MASKROM_LIB     LibBase    ,30     ,?C?ULDIV     
+                        311+1   MASKROM_LIB     LibBase    ,33     ,?C?LOR       
+                        314+1   MASKROM_LIB     LibBase    ,36     ,?C?ULCMP     
+                        317+1   MASKROM_LIB     LibBase    ,39     ,?C?ULSHR     
+                        320+1   MASKROM_LIB     LibBase    ,42     ,?C?LSHL      
+                        323+1   MASKROM_LIB     LibBase    ,45     ,?C?LLDXDATA  
+                        326+1   MASKROM_LIB     LibBase    ,48     ,?C?LLDPDATA  
+                        329+1   MASKROM_LIB     LibBase    ,51     ,?C?LLDXDATA0 
+                        332+1   MASKROM_LIB     LibBase    ,54     ,?C?LLDPDATA0 
+                        335+1   MASKROM_LIB     LibBase    ,57     ,?C?LILDIDATA 
+                        338+1   MASKROM_LIB     LibBase    ,60     ,?C?LSTXDATA  
+                        341+1   MASKROM_LIB     LibBase    ,63     ,?C?LSTPDATA  
+                        344+1   MASKROM_LIB     LibBase    ,66     ,?C?LSTKXDATA 
+                        347+1   MASKROM_LIB     LibBase    ,69     ,?C?LSTKPDATA 
+                        350+1   MASKROM_LIB     LibBase    ,72     ,?C?OFFXADD   
+                        353+1   MASKROM_LIB     LibBase    ,75     ,?C?PLDIIDATA 
+                        356+1   MASKROM_LIB     LibBase    ,78     ,?C?PLDPDATA  
+                        359+1   MASKROM_LIB     LibBase    ,81     ,?C?PSTPDATA  
+                        362+1   MASKROM_LIB     LibBase    ,84     ,?C?PLDCODE   
+                        365+1   MASKROM_LIB     LibBase    ,87     ,?C?CCASE     
+                        368+1   MASKROM_LIB     LibBase    ,90     ,?C?ICALL     
+                        371+1   MASKROM_LIB     LibBase    ,93     ,?C?LIMUL 
+                        374+1   MASKROM_LIB     LibBase    ,96     ,?C?ICALL2   
+                        377+1   MASKROM_LIB     LibBase    ,99     ,?C?CSTOPTR
+                        380+1   MASKROM_LIB     LibBase    ,102    ,?C?ISTOPTR
+                        383+1   MASKROM_LIB     LibBase    ,105    ,?C?SLDIV
+                        386+1   MASKROM_LIB     LibBase    ,108    ,?C?SLCMP
+                        389+1   MASKROM_LIB     LibBase    ,111    ,?C?ILDPTR
+                        392+1   MASKROM_LIB     LibBase    ,114    ,?C?PLDXDATA
+                        395+1   MASKROM_LIB     LibBase    ,117    ,?C?ISTPTR
+                        398+1   MASKROM_LIB     LibBase    ,120    ,?C?PSTXDATA 
+                        401+1   MASKROM_LIB     LibBase    ,123    ,_MY_MEMCPY
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     6
+
+                        404+1   MASKROM_LIB     LibBase    ,126    ,_MY_MEMSET 
+                        407+1   MASKROM_LIB     LibBase    ,129    ,_int2
+                        410+1   MASKROM_LIB     LibBase    ,132    ,_int3
+                        413+1   MASKROM_LIB     LibBase    ,135    ,_int4
+                        416+1   MASKROM_LIB     LibBase    ,138    ,_int2_l
+                        419+1   MASKROM_LIB     LibBase    ,141    ,_int3_l
+                        422+1   MASKROM_LIB     LibBase    ,144    ,_int4_l
+                        425+1   MASKROM_LIB     LibBase    ,147    ,dec_delay_counter
+                        428+1   MASKROM_LIB     LibBase    ,150    ,_delay_10ms
+                        431+1   MASKROM_LIB     LibBase    ,153    ,_delay
+                        434+1   MASKROM_LIB     LibBase    ,156    ,_put_msg_fifo
+                        437+1   MASKROM_LIB     LibBase    ,159    ,_put_msg_lifo
+                        440+1   MASKROM_LIB     LibBase    ,162    ,get_msg
+                        443+1   MASKROM_LIB     LibBase    ,165    ,get_h_msg
+                        446+1   MASKROM_LIB     LibBase    ,168    ,get_l_msg
+                        449+1   MASKROM_LIB     LibBase    ,171    ,flush_low_msg
+                        452+1   MASKROM_LIB     LibBase    ,174    ,flush_all_msg
+                        455+1   MASKROM_LIB     LibBase    ,177    ,_dsp_set_volume
+                        458+1   MASKROM_LIB     LibBase    ,180    ,_dsp_set_sr
+                        461+1   MASKROM_LIB     LibBase    ,183    ,_dsp_set_kv 
+                        464+1   MASKROM_LIB     LibBase    ,186    ,_dsp_set_rinv_mode
+                        467+1   MASKROM_LIB     LibBase    ,189    ,_dsp_set_ch_mode
+                        470+1   MASKROM_LIB     LibBase    ,192    ,_dsp_set_eq_coeff
+                        473+1   MASKROM_LIB     LibBase    ,195    ,_dsp_set_eq_mode
+                        476+1   MASKROM_LIB     LibBase    ,198    ,_dsp_get_ram
+                        479+1   MASKROM_LIB     LibBase    ,201    ,_dsp_set_dcc_flt
+                        482+1   MASKROM_LIB     LibBase    ,204    ,_dsp_set_record
+                        485+1   MASKROM_LIB     LibBase    ,207    ,_dsp_set_adc_con
+                        488+1   MASKROM_LIB     LibBase    ,210    ,_dsp_set_adc_spd
+                        491+1   MASKROM_LIB     LibBase    ,213    ,dsp_get_adc_con
+                        494+1   MASKROM_LIB     LibBase    ,216    ,dsp_get_spec_disp
+                        497+1   MASKROM_LIB     LibBase    ,219    ,_dsp_set_call
+                        500+1   MASKROM_LIB     LibBase    ,222    ,get_dec_msg_ptr
+                        503+1   MASKROM_LIB     LibBase    ,225    ,_write_dac
+                        506+1   MASKROM_LIB     LibBase    ,228    ,ckc_interrupt
+                        509+1   MASKROM_LIB     LibBase    ,231    ,ckc_init
+                        512+1   MASKROM_LIB     LibBase    ,234    ,get_crc_ptr
+                        515+1   MASKROM_LIB     LibBase    ,237    ,fs_fun_init
+                        518+1   MASKROM_LIB     LibBase    ,240    ,stop_clock
+                        521                                                
+                        522     
+                        523     
+                        524+1   BSP_FUN    2 , entry, usb_polling                
+                        531     
+                        532+1   BSP_FUN    6 , entry, _sd_speed_init                
+                        539+1   BSP_FUN    8 , entry, init_port_sd
+                        546+1   BSP_FUN    10, entry, get_device_online_status
+                        553     
+                        554+1   BSP_FUN    14, entry, _usb_config
+                        561+1   BSP_FUN    16, entry, _write_protect_set
+                        568+1   BSP_FUN    18, entry, init_usb_device_hardware
+                        575+1   BSP_FUN    20, entry, UFI_massstorage
+                        582+1   BSP_FUN    22, entry, init_sd
+                        589+1   BSP_FUN    24, entry, _sdmmc_read
+                        596+1   BSP_FUN    26, entry, _fs_scan_disk
+                        603+1   BSP_FUN    28, entry, _fs_getfile_bynumber
+                        610+1   BSP_FUN    30, entry, _fs_getfile_longname
+                        617+1   BSP_FUN    32, entry, _fs_ext_setting
+                        624+1   BSP_FUN    34, entry, _music_format_check
+                        631+1   BSP_FUN    36, entry, _mad_control
+                        638+1   BSP_FUN    38, entry, _usb_hid_key
+                        645+1   BSP_FUN    40, entry, _usb_host_emuerate_devcie
+                        652+1   BSP_FUN    42, entry, get_usb_device_pkt_size
+                        659+1   BSP_FUN    44, entry, _read_usb
+                        666+1   BSP_FUN    46, entry, _decode_eq_switch
+                        673+1   BSP_FUN    48, entry, bsp_init
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     7
+
+                        680+1   BSP_FUN    50, entry, _check_event
+                        687+1   BSP_FUN    52, entry, _put_event
+                        694+1   BSP_FUN    54, entry, _clear_one_event
+                        701+1   BSP_FUN    56, entry, get_event
+                        708+1   BSP_FUN    58, entry, clear_all_event
+                        715+1   BSP_FUN    60, entry, _read_file_id
+                        722     
+                        723+1   BSP_FUN    64, entry, _read_rtc_ram
+                        730+1   BSP_FUN    66, entry, _write_rtc_ram
+                        737+1   BSP_FUN    68, entry, _write_rtc_reg
+                        744+1   BSP_FUN    70, entry, read_rtc_reg
+                        751+1   BSP_FUN    72, entry, _interrupt_init
+                        758+1   BSP_FUN    74, entry, _dac_init
+                        765+1   BSP_FUN    76, entry, _dac_out_select
+                        772+1   BSP_FUN    78, entry, dac_mute_toggle
+                        779+1   BSP_FUN    80, entry, _dac_mute_control
+                        786+1   BSP_FUN    82, entry, _get_dac_vol
+                        793+1   BSP_FUN    84, entry, _main_vol_set
+                        800+1   BSP_FUN    86, entry, _digital_vol_set
+                        807+1   BSP_FUN    88, entry, _recording_start
+                        814+1   BSP_FUN    90, entry, recording_end
+                        821+1   BSP_FUN    92, entry, burst_out_break_point_save
+                        828+1   BSP_FUN    94, entry, _PLL_init
+                        835+1   BSP_FUN    96, entry, _irtc_sr_byte
+                        842+1   BSP_FUN    98, entry, _sdmmc_online_chk
+                        849+1   BSP_FUN    100,entry, WDT_CLEAR
+                        856+1   BSP_FUN    102,entry, fun_send_kv
+                        863+1   BSP_FUN    104,entry, send_alm_voice
+                        870+1   BSP_FUN    106,entry, kv_send_finish
+                        877+1   BSP_FUN    108,entry, bsp_kv_init
+                        884+1   BSP_FUN    110,entry, _set_max_vol
+                        891+1   BSP_FUN    112,entry, core_power_on
+                        898+1   BSP_FUN    114,entry, core_power_off
+                        905+1   BSP_FUN    116,entry, _f_mount_bsp
+                        912     
+                        913+1   BSP_FUN    120,entry, _sdmmc_chk_io
+                        920+1   BSP_FUN    122,entry, _dac_on1
+                        927+1   BSP_FUN    124,entry, _dac_off
+                        934     
+                        935+1   BSP_FUN    126,entry,suspend_sdmmc
+                        942+1   BSP_FUN    128,entry,_PLL_init_osc
+                        949+1   BSP_FUN    130,entry,usb_suspend
+                        956+1   BSP_FUN    132,entry,encode_time
+                        963+1   BSP_FUN    134,entry,_f_write_init
+                        970+1   BSP_FUN    136,entry,_start_encode
+                        977+1   BSP_FUN    138,entry,stop_encode
+                        984+1   BSP_FUN    140,entry,pause_encode
+                        991+1   BSP_FUN    142,entry,continue_encode
+                        998+1   BSP_FUN    144,entry,_set_rec_channel
+                       1005+1   BSP_FUN    146,entry,_set_rec_vol
+                       1012+1   BSP_FUN    148,entry,_set_rec_track
+                       1019+1   BSP_FUN    150,entry,_delete_current_file
+                       1026+1   BSP_FUN    152,entry,_rec_dirfile_name
+                       1033     
+                       1034+1   BSP_FUN    154,entry,_dsp_recode_channel
+                       1041     
+                       1042     
+                       1043     
+                       1044+1   MASKROM_FUN    0  , entry, _f_seek
+                       1051+1   MASKROM_FUN    2  , entry, _f_read
+                       1058+1   MASKROM_FUN    4  , entry, _f_tell_status
+                       1065+1   MASKROM_FUN    6  , entry, _f_tell_fsize
+                       1072+1   MASKROM_FUN    8  , entry, _f_tell_fptr
+                       1079+1   MASKROM_FUN    10 , entry, _f_getfilename
+                       1086+1   MASKROM_FUN    12 , entry, _f_readnextdir
+                       1093+1   MASKROM_FUN    14 , entry, _search_dir_entry
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     8
+
+                       1100+1   MASKROM_FUN    16 , entry, _f_open
+                       1107+1   MASKROM_FUN    18 , entry, _f_opendir
+                       1114+1   MASKROM_FUN    20 , entry, f_mount
+                       1121+1   MASKROM_FUN    22 , entry, _f_init
+                       1128+1   MASKROM_FUN    24 , entry, file_io_init
+                       1135+1   MASKROM_FUN    26 , entry, WMA_decode
+                       1142+1   MASKROM_FUN    28 , entry, _f_parse_fat_lfn
+                       1149+1   MASKROM_FUN    30 , entry, _wma_init
+                       1156+1   MASKROM_FUN    32 , entry, _ff_id3v1_match
+                       1163+1   MASKROM_FUN    34 , entry, _ff_id3v2_frame_len
+                       1170+1   MASKROM_FUN    36 , entry, _ff_cal_id3v2_tag_len
+                       1177+1   MASKROM_FUN    38 , entry, _ff_id3v2_check
+                       1184+1   MASKROM_FUN    40 , entry, _ff_id3v2_parse_header
+                       1191+1   MASKROM_FUN    42 , entry, _ff_id3v2_parse
+                       1198+1   MASKROM_FUN    44 , entry, mp3_init
+                       1205+1   MASKROM_FUN    46 , entry, mp3_decode
+                       1212+1   MASKROM_FUN    48 , entry, _mp3_control
+                       1219+1   MASKROM_FUN    50 , entry, _wav_control
+                       1226+1   MASKROM_FUN    52 , entry, _wma_control
+                       1233+1   MASKROM_FUN    54 , entry, ff_mpegaudio_decode_header
+                       1240+1   MASKROM_FUN    56 , entry, ff_mpa_sync_header
+                       1247+1   MASKROM_FUN    58 , entry, check_next_frame
+                       1254+1   MASKROM_FUN    60 , entry, mp3_get_frame_sample_size
+                       1261+1   MASKROM_FUN    62 , entry, mp3_get_bit_rate
+                       1268+1   MASKROM_FUN    64 , entry, mad_layer_III_decode
+                       1275+1   MASKROM_FUN    66 , entry, copy_remain_data
+                       1282+1   MASKROM_FUN    68 , entry, mad_layer_III
+                       1289+1   MASKROM_FUN    70 , entry, mad_layer_III_gr
+                       1296+1   MASKROM_FUN    72 , entry, _III_requantize
+                       1303+1   MASKROM_FUN    74 , entry, _III_huffdecode
+                       1310+1   MASKROM_FUN    76 , entry, _III_scalefactors_lsf
+                       1317+1   MASKROM_FUN    78 , entry, _III_scalefactors
+                       1324+1   MASKROM_FUN    80 , entry, III_sideinfo
+                       1331+1   MASKROM_FUN    82 , entry, decode_vbr_tag
+                       1338+1   MASKROM_FUN    84 , entry, _dec_set_eq
+                       1345+1   MASKROM_FUN    86 , entry, mad_layer_I
+                       1352+1   MASKROM_FUN    88 , entry, mad_layer_II
+                       1359+1   MASKROM_FUN    90 , entry, mad_layer_II_gr
+                       1366+1   MASKROM_FUN    92 , entry, get_mp3_total_time
+                       1373+1   MASKROM_FUN    94 , entry, clear_overlap
+                       1380+1   MASKROM_FUN    96 , entry, _cal_frame_len
+                       1387+1   MASKROM_FUN    98 , entry, get_play_log
+                       1394+1   MASKROM_FUN    100, entry, play_log_backup
+                       1401+1   MASKROM_FUN    102, entry, get_mp3_play_time
+                       1408+1   MASKROM_FUN    104, entry, _wav_format_check
+                       1415+1   MASKROM_FUN    106, entry, _find_tag
+                       1422+1   MASKROM_FUN    108, entry, wav_decode
+                       1429+1   MASKROM_FUN    110, entry, wav_input_data
+                       1436+1   MASKROM_FUN    112, entry, wav_get_frame_sample_size
+                       1443+1   MASKROM_FUN    114, entry, _wav_get_time
+                       1450+1   MASKROM_FUN    116, entry, _convert_sample_rate
+                       1457+1   MASKROM_FUN    118, entry, _get_mp3_sample_rate
+                       1464+1   MASKROM_FUN    120, entry, wmacheak_log
+                       1471+1   MASKROM_FUN    122, entry, get_wma_play_time
+                       1478+1   MASKROM_FUN    124, entry, _asf_read_header
+                       1485+1   MASKROM_FUN    126, entry, wma_decode_init
+                       1492+1   MASKROM_FUN    128, entry, chank_tagframe
+                       1499+1   MASKROM_FUN    130, entry, wma_decode_block
+                       1506+1   MASKROM_FUN    132, entry, wmastrpak
+                       1513+1   MASKROM_FUN    134, entry, get_wav_header
+                       1520+1   MASKROM_FUN    136, entry, asf_get_packet
+                       1527+1   MASKROM_FUN    138, entry, asf_read_packet
+                       1534+1   MASKROM_FUN    140, entry, _check_fs
+                       1541+1   MASKROM_FUN    142, entry, wma_stream_len
+                       1548+1   MASKROM_FUN    144, entry, wma_stream_start_address
+                       1555+1   MASKROM_FUN    146, entry, _get_bits1
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE     9
+
+                       1562+1   MASKROM_FUN    148, entry, _wma_get_bits
+                       1569+1   MASKROM_FUN    150, entry, _wmafreadbuf
+                       1576+1   MASKROM_FUN    152, entry, wmafillbuf
+                       1583+1   MASKROM_FUN    154, entry, _wmatestfill
+                       1590+1   MASKROM_FUN    156, entry, _wmaskip_bit
+                       1597     
+                       1598                     
+                       1599                     END                                                                
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    10
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                                    T Y P E  V A L U E     ATTRIBUTES
+
+?C?CCASE. . . . . . . . . . . . . . . .    C  ADDR  9672H     A   
+?C?CLDOPTR. . . . . . . . . . . . . . .    C  ADDR  961EH     A   
+?C?CLDPTR . . . . . . . . . . . . . . .    C  ADDR  961BH     A   
+?C?CSTOPTR. . . . . . . . . . . . . . .    C  ADDR  967EH     A   
+?C?CSTPTR . . . . . . . . . . . . . . .    C  ADDR  9621H     A   
+?C?ICALL. . . . . . . . . . . . . . . .    C  ADDR  9675H     A   
+?C?ICALL2 . . . . . . . . . . . . . . .    C  ADDR  967BH     A   
+?C?IILDX. . . . . . . . . . . . . . . .    C  ADDR  962AH     A   
+?C?ILDOPTR. . . . . . . . . . . . . . .    C  ADDR  962DH     A   
+?C?ILDPTR . . . . . . . . . . . . . . .    C  ADDR  968AH     A   
+?C?IMUL . . . . . . . . . . . . . . . .    C  ADDR  9624H     A   
+?C?ISTOPTR. . . . . . . . . . . . . . .    C  ADDR  9681H     A   
+?C?ISTPTR . . . . . . . . . . . . . . .    C  ADDR  9690H     A   
+?C?LADD . . . . . . . . . . . . . . . .    C  ADDR  9630H     A   
+?C?LILDIDATA. . . . . . . . . . . . . .    C  ADDR  9654H     A   
+?C?LIMUL. . . . . . . . . . . . . . . .    C  ADDR  9678H     A   
+?C?LLDPDATA . . . . . . . . . . . . . .    C  ADDR  964BH     A   
+?C?LLDPDATA0. . . . . . . . . . . . . .    C  ADDR  9651H     A   
+?C?LLDXDATA . . . . . . . . . . . . . .    C  ADDR  9648H     A   
+?C?LLDXDATA0. . . . . . . . . . . . . .    C  ADDR  964EH     A   
+?C?LMUL . . . . . . . . . . . . . . . .    C  ADDR  9636H     A   
+?C?LOR. . . . . . . . . . . . . . . . .    C  ADDR  963CH     A   
+?C?LSHL . . . . . . . . . . . . . . . .    C  ADDR  9645H     A   
+?C?LSTKPDATA. . . . . . . . . . . . . .    C  ADDR  9660H     A   
+?C?LSTKXDATA. . . . . . . . . . . . . .    C  ADDR  965DH     A   
+?C?LSTPDATA . . . . . . . . . . . . . .    C  ADDR  965AH     A   
+?C?LSTXDATA . . . . . . . . . . . . . .    C  ADDR  9657H     A   
+?C?LSUB . . . . . . . . . . . . . . . .    C  ADDR  9633H     A   
+?C?OFFXADD. . . . . . . . . . . . . . .    C  ADDR  9663H     A   
+?C?PLDCODE. . . . . . . . . . . . . . .    C  ADDR  966FH     A   
+?C?PLDIIDATA. . . . . . . . . . . . . .    C  ADDR  9666H     A   
+?C?PLDPDATA . . . . . . . . . . . . . .    C  ADDR  9669H     A   
+?C?PLDXDATA . . . . . . . . . . . . . .    C  ADDR  968DH     A   
+?C?PSTPDATA . . . . . . . . . . . . . .    C  ADDR  966CH     A   
+?C?PSTXDATA . . . . . . . . . . . . . .    C  ADDR  9693H     A   
+?C?SLCMP. . . . . . . . . . . . . . . .    C  ADDR  9687H     A   
+?C?SLDIV. . . . . . . . . . . . . . . .    C  ADDR  9684H     A   
+?C?UIDIV. . . . . . . . . . . . . . . .    C  ADDR  9627H     A   
+?C?ULCMP. . . . . . . . . . . . . . . .    C  ADDR  963FH     A   
+?C?ULDIV. . . . . . . . . . . . . . . .    C  ADDR  9639H     A   
+?C?ULSHR. . . . . . . . . . . . . . . .    C  ADDR  9642H     A   
+?PR?_ASF_READ_HEADER?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_CAL_FRAME_LEN?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_CHECK_EVENT?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_CHECK_FS?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_CLEAR_ONE_EVENT?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_CONVERT_SAMPLE_RATE?ENTRY. . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DAC_INIT?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DAC_MUTE_CONTROL?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DAC_OFF?ENTRY. . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DAC_ON1?ENTRY. . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DAC_OUT_SELECT?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DEC_SET_EQ?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DECODE_EQ_SWITCH?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DELETE_CURRENT_FILE?ENTRY. . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DIGITAL_VOL_SET?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_DSP_RECODE_CHANNEL?ENTRY . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_GETFILENAME?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_INIT?ENTRY . . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_MOUNT_BSP?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    11
+
+?PR?_F_OPEN?ENTRY . . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_OPENDIR?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_PARSE_FAT_LFN?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_READ?ENTRY . . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_READNEXTDIR?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_SEEK?ENTRY . . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_TELL_FPTR?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_TELL_FSIZE?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_TELL_STATUS?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_F_WRITE_INIT?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FF_CAL_ID3V2_TAG_LEN?ENTRY . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FF_ID3V1_MATCH?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FF_ID3V2_CHECK?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FF_ID3V2_FRAME_LEN?ENTRY . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FF_ID3V2_PARSE?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FF_ID3V2_PARSE_HEADER?ENTRY. . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FIND_TAG?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FS_EXT_SETTING?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FS_GETFILE_BYNUMBER?ENTRY. . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FS_GETFILE_LONGNAME?ENTRY. . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_FS_SCAN_DISK?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_GET_BITS1?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_GET_DAC_VOL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_GET_MP3_SAMPLE_RATE?ENTRY. . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_III_HUFFDECODE?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_III_REQUANTIZE?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_III_SCALEFACTORS?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_III_SCALEFACTORS_LSF?ENTRY . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_INTERRUPT_INIT?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_IRTC_SR_BYTE?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_MAD_CONTROL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_MAIN_VOL_SET?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_MP3_CONTROL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_MUSIC_FORMAT_CHECK?ENTRY . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_PLL_INIT?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_PLL_INIT_OSC?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_PUT_EVENT?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_READ_FILE_ID?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_READ_RTC_RAM?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_READ_USB?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_REC_DIRFILE_NAME?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_RECORDING_START?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SD_SPEED_INIT?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SDMMC_CHK_IO?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SDMMC_ONLINE_CHK?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SDMMC_READ?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SEARCH_DIR_ENTRY?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SET_MAX_VOL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SET_REC_CHANNEL?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SET_REC_TRACK?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_SET_REC_VOL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_START_ENCODE?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_USB_CONFIG?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_USB_HID_KEY?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_USB_HOST_EMUERATE_DEVCIE?ENTRY . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WAV_CONTROL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WAV_FORMAT_CHECK?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WAV_GET_TIME?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WMA_CONTROL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WMA_GET_BITS?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WMA_INIT?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WMAFREADBUF?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WMASKIP_BIT?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WMATESTFILL?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WRITE_PROTECT_SET?ENTRY. . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?_WRITE_RTC_RAM?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    12
+
+?PR?_WRITE_RTC_REG?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?ASF_GET_PACKET?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?ASF_READ_PACKET?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?BSP_INIT?ENTRY. . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?BSP_KV_INIT?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?BURST_OUT_BREAK_POINT_SAVE?ENTRY. .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CHANK_TAGFRAME?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CHECK_NEXT_FRAME?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CLEAR_ALL_EVENT?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CLEAR_OVERLAP?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CONTINUE_ENCODE?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?COPY_REMAIN_DATA?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CORE_POWER_OFF?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?CORE_POWER_ON?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?DAC_MUTE_TOGGLE?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?DECODE_VBR_TAG?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?ENCODE_TIME?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?F_MOUNT?ENTRY . . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?FF_MPA_SYNC_HEADER?ENTRY. . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?FF_MPEGAUDIO_DECODE_HEADER?ENTRY. .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?FILE_IO_INIT?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?FUN_SEND_KV?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_DEVICE_ONLINE_STATUS?ENTRY. . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_EVENT?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_MP3_PLAY_TIME?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_MP3_TOTAL_TIME?ENTRY. . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_PLAY_LOG?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_USB_DEVICE_PKT_SIZE?ENTRY . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_WAV_HEADER?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?GET_WMA_PLAY_TIME?ENTRY . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?III_SIDEINFO?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?INIT_PORT_SD?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?INIT_SD?ENTRY . . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?INIT_USB_DEVICE_HARDWARE?ENTRY. . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?KV_SEND_FINISH?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MAD_LAYER_I?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MAD_LAYER_II?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MAD_LAYER_II_GR?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MAD_LAYER_III?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MAD_LAYER_III_DECODE?ENTRY. . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MAD_LAYER_III_GR?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MP3_DECODE?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MP3_GET_BIT_RATE?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MP3_GET_FRAME_SAMPLE_SIZE?ENTRY . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?MP3_INIT?ENTRY. . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?PAUSE_ENCODE?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?PLAY_LOG_BACKUP?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?READ_RTC_REG?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?RECORDING_END?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?SEND_ALM_VOICE?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?STOP_ENCODE?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?SUSPEND_SDMMC?ENTRY . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?UFI_MASSSTORAGE?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?USB_POLLING?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?USB_SUSPEND?ENTRY . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WAV_DECODE?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WAV_GET_FRAME_SAMPLE_SIZE?ENTRY . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WAV_INPUT_DATA?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WDT_CLEAR?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMA_DECODE?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMA_DECODE_BLOCK?ENTRY. . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMA_DECODE_INIT?ENTRY . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMA_STREAM_LEN?ENTRY. . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMA_STREAM_START_ADDRESS?ENTRY. . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMACHEAK_LOG?ENTRY. . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+?PR?WMAFILLBUF?ENTRY. . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    13
+
+?PR?WMASTRPAK?ENTRY . . . . . . . . . .    C  SEG   000005H       REL=UNIT, ALN=BYTE
+_ASF_READ_HEADER. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_ASF_READ_HEADER?ENTRY
+_CAL_FRAME_LEN. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_CAL_FRAME_LEN?ENTRY
+_CHECK_EVENT. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_CHECK_EVENT?ENTRY
+_CHECK_FS . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_CHECK_FS?ENTRY
+_CLEAR_ONE_EVENT. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_CLEAR_ONE_EVENT?ENTRY
+_CONVERT_SAMPLE_RATE. . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_CONVERT_SAMPLE_RATE?ENTRY
+_DAC_INIT . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DAC_INIT?ENTRY
+_DAC_MUTE_CONTROL . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DAC_MUTE_CONTROL?ENTRY
+_DAC_OFF. . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DAC_OFF?ENTRY
+_DAC_ON1. . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DAC_ON1?ENTRY
+_DAC_OUT_SELECT . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DAC_OUT_SELECT?ENTRY
+_DEC_SET_EQ . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DEC_SET_EQ?ENTRY
+_DECODE_EQ_SWITCH . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DECODE_EQ_SWITCH?ENTRY
+_DELAY. . . . . . . . . . . . . . . . .    C  ADDR  96B4H     A   
+_DELAY_10MS . . . . . . . . . . . . . .    C  ADDR  96B1H     A   
+_DELETE_CURRENT_FILE. . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DELETE_CURRENT_FILE?ENTRY
+_DIGITAL_VOL_SET. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DIGITAL_VOL_SET?ENTRY
+_DSP_GET_RAM. . . . . . . . . . . . . .    C  ADDR  96E1H     A   
+_DSP_RECODE_CHANNEL . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_DSP_RECODE_CHANNEL?ENTRY
+_DSP_SET_ADC_CON. . . . . . . . . . . .    C  ADDR  96EAH     A   
+_DSP_SET_ADC_SPD. . . . . . . . . . . .    C  ADDR  96EDH     A   
+_DSP_SET_CALL . . . . . . . . . . . . .    C  ADDR  96F6H     A   
+_DSP_SET_CH_MODE. . . . . . . . . . . .    C  ADDR  96D8H     A   
+_DSP_SET_DCC_FLT. . . . . . . . . . . .    C  ADDR  96E4H     A   
+_DSP_SET_EQ_COEFF . . . . . . . . . . .    C  ADDR  96DBH     A   
+_DSP_SET_EQ_MODE. . . . . . . . . . . .    C  ADDR  96DEH     A   
+_DSP_SET_KV . . . . . . . . . . . . . .    C  ADDR  96D2H     A   
+_DSP_SET_RECORD . . . . . . . . . . . .    C  ADDR  96E7H     A   
+_DSP_SET_RINV_MODE. . . . . . . . . . .    C  ADDR  96D5H     A   
+_DSP_SET_SR . . . . . . . . . . . . . .    C  ADDR  96CFH     A   
+_DSP_SET_VOLUME . . . . . . . . . . . .    C  ADDR  96CCH     A   
+_F_GETFILENAME. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_GETFILENAME?ENTRY
+_F_INIT . . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_INIT?ENTRY
+_F_MOUNT_BSP. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_MOUNT_BSP?ENTRY
+_F_OPEN . . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_OPEN?ENTRY
+_F_OPENDIR. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_OPENDIR?ENTRY
+_F_PARSE_FAT_LFN. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_PARSE_FAT_LFN?ENTRY
+_F_READ . . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_READ?ENTRY
+_F_READNEXTDIR. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_READNEXTDIR?ENTRY
+_F_SEEK . . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_SEEK?ENTRY
+_F_TELL_FPTR. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_TELL_FPTR?ENTRY
+_F_TELL_FSIZE . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_TELL_FSIZE?ENTRY
+_F_TELL_STATUS. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_TELL_STATUS?ENTRY
+_F_WRITE_INIT . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_F_WRITE_INIT?ENTRY
+_FF_CAL_ID3V2_TAG_LEN . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FF_CAL_ID3V2_TAG_LEN?ENTRY
+_FF_ID3V1_MATCH . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FF_ID3V1_MATCH?ENTRY
+_FF_ID3V2_CHECK . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FF_ID3V2_CHECK?ENTRY
+_FF_ID3V2_FRAME_LEN . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FF_ID3V2_FRAME_LEN?ENTRY
+_FF_ID3V2_PARSE . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FF_ID3V2_PARSE?ENTRY
+_FF_ID3V2_PARSE_HEADER. . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FF_ID3V2_PARSE_HEADER?ENTRY
+_FIND_TAG . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FIND_TAG?ENTRY
+_FS_EXT_SETTING . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FS_EXT_SETTING?ENTRY
+_FS_GETFILE_BYNUMBER. . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FS_GETFILE_BYNUMBER?ENTRY
+_FS_GETFILE_LONGNAME. . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FS_GETFILE_LONGNAME?ENTRY
+_FS_SCAN_DISK . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_FS_SCAN_DISK?ENTRY
+_GET_BITS1. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_GET_BITS1?ENTRY
+_GET_DAC_VOL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_GET_DAC_VOL?ENTRY
+_GET_MP3_SAMPLE_RATE. . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_GET_MP3_SAMPLE_RATE?ENTRY
+_III_HUFFDECODE . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_III_HUFFDECODE?ENTRY
+_III_REQUANTIZE . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_III_REQUANTIZE?ENTRY
+_III_SCALEFACTORS . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_III_SCALEFACTORS?ENTRY
+_III_SCALEFACTORS_LSF . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_III_SCALEFACTORS_LSF?ENTRY
+_INT2 . . . . . . . . . . . . . . . . .    C  ADDR  969CH     A   
+_INT2_L . . . . . . . . . . . . . . . .    C  ADDR  96A5H     A   
+_INT3 . . . . . . . . . . . . . . . . .    C  ADDR  969FH     A   
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    14
+
+_INT3_L . . . . . . . . . . . . . . . .    C  ADDR  96A8H     A   
+_INT4 . . . . . . . . . . . . . . . . .    C  ADDR  96A2H     A   
+_INT4_L . . . . . . . . . . . . . . . .    C  ADDR  96ABH     A   
+_INTERRUPT_INIT . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_INTERRUPT_INIT?ENTRY
+_IRTC_SR_BYTE . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_IRTC_SR_BYTE?ENTRY
+_MAD_CONTROL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_MAD_CONTROL?ENTRY
+_MAIN_VOL_SET . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_MAIN_VOL_SET?ENTRY
+_MP3_CONTROL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_MP3_CONTROL?ENTRY
+_MUSIC_FORMAT_CHECK . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_MUSIC_FORMAT_CHECK?ENTRY
+_MY_MEMCPY. . . . . . . . . . . . . . .    C  ADDR  9696H     A   
+_MY_MEMSET. . . . . . . . . . . . . . .    C  ADDR  9699H     A   
+_PLL_INIT . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_PLL_INIT?ENTRY
+_PLL_INIT_OSC . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_PLL_INIT_OSC?ENTRY
+_PUT_EVENT. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_PUT_EVENT?ENTRY
+_PUT_MSG_FIFO . . . . . . . . . . . . .    C  ADDR  96B7H     A   
+_PUT_MSG_LIFO . . . . . . . . . . . . .    C  ADDR  96BAH     A   
+_READ_FILE_ID . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_READ_FILE_ID?ENTRY
+_READ_RTC_RAM . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_READ_RTC_RAM?ENTRY
+_READ_USB . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_READ_USB?ENTRY
+_REC_DIRFILE_NAME . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_REC_DIRFILE_NAME?ENTRY
+_RECORDING_START. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_RECORDING_START?ENTRY
+_SD_SPEED_INIT. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SD_SPEED_INIT?ENTRY
+_SDMMC_CHK_IO . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SDMMC_CHK_IO?ENTRY
+_SDMMC_ONLINE_CHK . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SDMMC_ONLINE_CHK?ENTRY
+_SDMMC_READ . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SDMMC_READ?ENTRY
+_SEARCH_DIR_ENTRY . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SEARCH_DIR_ENTRY?ENTRY
+_SET_MAX_VOL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SET_MAX_VOL?ENTRY
+_SET_REC_CHANNEL. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SET_REC_CHANNEL?ENTRY
+_SET_REC_TRACK. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SET_REC_TRACK?ENTRY
+_SET_REC_VOL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_SET_REC_VOL?ENTRY
+_START_ENCODE . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_START_ENCODE?ENTRY
+_USB_CONFIG . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_USB_CONFIG?ENTRY
+_USB_HID_KEY. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_USB_HID_KEY?ENTRY
+_USB_HOST_EMUERATE_DEVCIE . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_USB_HOST_EMUERATE_DEVCIE?ENTRY
+_WAV_CONTROL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WAV_CONTROL?ENTRY
+_WAV_FORMAT_CHECK . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WAV_FORMAT_CHECK?ENTRY
+_WAV_GET_TIME . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WAV_GET_TIME?ENTRY
+_WMA_CONTROL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WMA_CONTROL?ENTRY
+_WMA_GET_BITS . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WMA_GET_BITS?ENTRY
+_WMA_INIT . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WMA_INIT?ENTRY
+_WMAFREADBUF. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WMAFREADBUF?ENTRY
+_WMASKIP_BIT. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WMASKIP_BIT?ENTRY
+_WMATESTFILL. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WMATESTFILL?ENTRY
+_WRITE_DAC. . . . . . . . . . . . . . .    C  ADDR  96FCH     A   
+_WRITE_PROTECT_SET. . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WRITE_PROTECT_SET?ENTRY
+_WRITE_RTC_RAM. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WRITE_RTC_RAM?ENTRY
+_WRITE_RTC_REG. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?_WRITE_RTC_REG?ENTRY
+AC. . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.6   A   
+ACC . . . . . . . . . . . . . . . . . .    D  ADDR  00E0H     A   
+ADCCON. . . . . . . . . . . . . . . . .    D  ADDR  009BH     A   
+ADCDATH . . . . . . . . . . . . . . . .    D  ADDR  009AH     A   
+ADCDATL . . . . . . . . . . . . . . . .    D  ADDR  0099H     A   
+ADSPPND . . . . . . . . . . . . . . . .    D  ADDR  00C0H     A   
+ASF_GET_PACKET. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?ASF_GET_PACKET?ENTRY
+ASF_READ_PACKET . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?ASF_READ_PACKET?ENTRY
+B . . . . . . . . . . . . . . . . . . .    D  ADDR  00F0H     A   
+BANKSEL . . . . . . . . . . . . . . . .    D  ADDR  008CH     A   
+BSP_INIT. . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?BSP_INIT?ENTRY
+BSP_JMP_TABLE . . . . . . . . . . . . .    N  NUMB  7F7FH     A   
+BSP_KV_INIT . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?BSP_KV_INIT?ENTRY
+BURST_OUT_BREAK_POINT_SAVE. . . . . . .    C  ADDR  0000H     R   SEG=?PR?BURST_OUT_BREAK_POINT_SAVE?ENTRY
+CHANK_TAGFRAME. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CHANK_TAGFRAME?ENTRY
+CHECK_NEXT_FRAME. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CHECK_NEXT_FRAME?ENTRY
+CKC_INIT. . . . . . . . . . . . . . . .    C  ADDR  9702H     A   
+CKC_INTERRUPT . . . . . . . . . . . . .    C  ADDR  96FFH     A   
+CKCBEN. . . . . . . . . . . . . . . . .    D  ADDR  00BEH     A   
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    15
+
+CKCCON. . . . . . . . . . . . . . . . .    D  ADDR  00BFH     A   
+CKCPRDH . . . . . . . . . . . . . . . .    D  ADDR  00AFH     A   
+CKCPRDL . . . . . . . . . . . . . . . .    D  ADDR  00AEH     A   
+CLEAR_ALL_EVENT . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CLEAR_ALL_EVENT?ENTRY
+CLEAR_OVERLAP . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CLEAR_OVERLAP?ENTRY
+CLKCON0 . . . . . . . . . . . . . . . .    D  ADDR  0086H     A   
+CLKCON1 . . . . . . . . . . . . . . . .    D  ADDR  0084H     A   
+CLKGAT. . . . . . . . . . . . . . . . .    D  ADDR  0085H     A   
+CONTINUE_ENCODE . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CONTINUE_ENCODE?ENTRY
+COPY_REMAIN_DATA. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?COPY_REMAIN_DATA?ENTRY
+CORE_POWER_OFF. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CORE_POWER_OFF?ENTRY
+CORE_POWER_ON . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?CORE_POWER_ON?ENTRY
+CRCFIFO . . . . . . . . . . . . . . . .    D  ADDR  00F3H     A   
+CRCREGH . . . . . . . . . . . . . . . .    D  ADDR  00FBH     A   
+CRCREGL . . . . . . . . . . . . . . . .    D  ADDR  00FAH     A   
+CY. . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.7   A   
+DAC_MUTE_TOGGLE . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?DAC_MUTE_TOGGLE?ENTRY
+DACCON0 . . . . . . . . . . . . . . . .    D  ADDR  00A4H     A   
+DACCON1 . . . . . . . . . . . . . . . .    D  ADDR  00B4H     A   
+DACCON2 . . . . . . . . . . . . . . . .    D  ADDR  00ACH     A   
+DACCON3 . . . . . . . . . . . . . . . .    D  ADDR  00BCH     A   
+DEC_DELAY_COUNTER . . . . . . . . . . .    C  ADDR  96AEH     A   
+DECODE_VBR_TAG. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?DECODE_VBR_TAG?ENTRY
+DP0H. . . . . . . . . . . . . . . . . .    D  ADDR  0083H     A   
+DP0L. . . . . . . . . . . . . . . . . .    D  ADDR  0082H     A   
+DP1H. . . . . . . . . . . . . . . . . .    D  ADDR  008BH     A   
+DP1L. . . . . . . . . . . . . . . . . .    D  ADDR  008AH     A   
+DPCON . . . . . . . . . . . . . . . . .    D  ADDR  0088H     A   
+DPSEL . . . . . . . . . . . . . . . . .    B  ADDR  0088H.0   A   
+DSP_GET_ADC_CON . . . . . . . . . . . .    C  ADDR  96F0H     A   
+DSP_GET_SPEC_DISP . . . . . . . . . . .    C  ADDR  96F3H     A   
+DSP_TOGGLE. . . . . . . . . . . . . . .    B  ADDR  0088H.3   A   
+EA. . . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.7   A   
+EIIC. . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.5   A   
+EMIBUF. . . . . . . . . . . . . . . . .    D  ADDR  00F2H     A   
+EMICON. . . . . . . . . . . . . . . . .    D  ADDR  00F1H     A   
+ENCODE_TIME . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?ENCODE_TIME?ENTRY
+ENTRY . . . . . . . . . . . . . . . . .    -- ----  -------       
+ESFT. . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.6   A   
+ESPI. . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.4   A   
+ET0 . . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.0   A   
+ET1 . . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.1   A   
+ET2 . . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.2   A   
+ET3 . . . . . . . . . . . . . . . . . .    B  ADDR  00A8H.3   A   
+F0. . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.5   A   
+F_MOUNT . . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?F_MOUNT?ENTRY
+FF_MPA_SYNC_HEADER. . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?FF_MPA_SYNC_HEADER?ENTRY
+FF_MPEGAUDIO_DECODE_HEADER. . . . . . .    C  ADDR  0000H     R   SEG=?PR?FF_MPEGAUDIO_DECODE_HEADER?ENTRY
+FILE_IO_INIT. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?FILE_IO_INIT?ENTRY
+FLUSH_ALL_MSG . . . . . . . . . . . . .    C  ADDR  96C9H     A   
+FLUSH_LOW_MSG . . . . . . . . . . . . .    C  ADDR  96C6H     A   
+FS_FUN_INIT . . . . . . . . . . . . . .    C  ADDR  9708H     A   
+FUN_SEND_KV . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?FUN_SEND_KV?ENTRY
+GET_CRC_PTR . . . . . . . . . . . . . .    C  ADDR  9705H     A   
+GET_DEC_MSG_PTR . . . . . . . . . . . .    C  ADDR  96F9H     A   
+GET_DEVICE_ONLINE_STATUS. . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_DEVICE_ONLINE_STATUS?ENTRY
+GET_EVENT . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_EVENT?ENTRY
+GET_H_MSG . . . . . . . . . . . . . . .    C  ADDR  96C0H     A   
+GET_L_MSG . . . . . . . . . . . . . . .    C  ADDR  96C3H     A   
+GET_MP3_PLAY_TIME . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_MP3_PLAY_TIME?ENTRY
+GET_MP3_TOTAL_TIME. . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_MP3_TOTAL_TIME?ENTRY
+GET_MSG . . . . . . . . . . . . . . . .    C  ADDR  96BDH     A   
+GET_PLAY_LOG. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_PLAY_LOG?ENTRY
+GET_USB_DEVICE_PKT_SIZE . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_USB_DEVICE_PKT_SIZE?ENTRY
+GET_WAV_HEADER. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_WAV_HEADER?ENTRY
+GET_WMA_PLAY_TIME . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?GET_WMA_PLAY_TIME?ENTRY
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    16
+
+IE0 . . . . . . . . . . . . . . . . . .    D  ADDR  00A8H     A   
+IE1 . . . . . . . . . . . . . . . . . .    D  ADDR  00A9H     A   
+IE2 . . . . . . . . . . . . . . . . . .    D  ADDR  00EDH     A   
+IICBUF. . . . . . . . . . . . . . . . .    D  ADDR  009FH     A   
+IICCON. . . . . . . . . . . . . . . . .    D  ADDR  009DH     A   
+IICSTA. . . . . . . . . . . . . . . . .    D  ADDR  009EH     A   
+III_SIDEINFO. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?III_SIDEINFO?ENTRY
+INIT_PORT_SD. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?INIT_PORT_SD?ENTRY
+INIT_SD . . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?INIT_SD?ENTRY
+INIT_USB_DEVICE_HARDWARE. . . . . . . .    C  ADDR  0000H     R   SEG=?PR?INIT_USB_DEVICE_HARDWARE?ENTRY
+IP0 . . . . . . . . . . . . . . . . . .    D  ADDR  00B8H     A   
+IP0H. . . . . . . . . . . . . . . . . .    D  ADDR  00A2H     A   
+IP1 . . . . . . . . . . . . . . . . . .    D  ADDR  00B9H     A   
+IP1H. . . . . . . . . . . . . . . . . .    D  ADDR  00B2H     A   
+IRTBUF. . . . . . . . . . . . . . . . .    D  ADDR  0097H     A   
+IRTCON. . . . . . . . . . . . . . . . .    D  ADDR  0096H     A   
+KV_SEND_FINISH. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?KV_SEND_FINISH?ENTRY
+LIBBASE . . . . . . . . . . . . . . . .    C  ADDR  961BH     A   
+MAD_LAYER_I . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MAD_LAYER_I?ENTRY
+MAD_LAYER_II. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MAD_LAYER_II?ENTRY
+MAD_LAYER_II_GR . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MAD_LAYER_II_GR?ENTRY
+MAD_LAYER_III . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MAD_LAYER_III?ENTRY
+MAD_LAYER_III_DECODE. . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MAD_LAYER_III_DECODE?ENTRY
+MAD_LAYER_III_GR. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MAD_LAYER_III_GR?ENTRY
+MASKROM_ENTRY_SECTION . . . . . . . . .    -- ----  -------       
+MASKROM_JMP_TABLE . . . . . . . . . . .    N  NUMB  9000H     A   
+MP3_DECODE. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MP3_DECODE?ENTRY
+MP3_GET_BIT_RATE. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MP3_GET_BIT_RATE?ENTRY
+MP3_GET_FRAME_SAMPLE_SIZE . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MP3_GET_FRAME_SAMPLE_SIZE?ENTRY
+MP3_INIT. . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?MP3_INIT?ENTRY
+OV. . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.2   A   
+P . . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.0   A   
+P0. . . . . . . . . . . . . . . . . . .    D  ADDR  0080H     A   
+P00 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.0   A   
+P01 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.1   A   
+P02 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.2   A   
+P03 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.3   A   
+P04 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.4   A   
+P05 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.5   A   
+P06 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.6   A   
+P07 . . . . . . . . . . . . . . . . . .    B  ADDR  0080H.7   A   
+P0DIR . . . . . . . . . . . . . . . . .    D  ADDR  00E4H     A   
+P0HD. . . . . . . . . . . . . . . . . .    D  ADDR  00C2H     A   
+P0PD. . . . . . . . . . . . . . . . . .    D  ADDR  0092H     A   
+P0PU. . . . . . . . . . . . . . . . . .    D  ADDR  00F4H     A   
+P1. . . . . . . . . . . . . . . . . . .    D  ADDR  0090H     A   
+P10 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.0   A   
+P11 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.1   A   
+P12 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.2   A   
+P13 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.3   A   
+P14 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.4   A   
+P15 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.5   A   
+P16 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.6   A   
+P17 . . . . . . . . . . . . . . . . . .    B  ADDR  0090H.7   A   
+P1DIR . . . . . . . . . . . . . . . . .    D  ADDR  00E5H     A   
+P1HD. . . . . . . . . . . . . . . . . .    D  ADDR  00C3H     A   
+P1PD. . . . . . . . . . . . . . . . . .    D  ADDR  0093H     A   
+P1PU. . . . . . . . . . . . . . . . . .    D  ADDR  00F5H     A   
+P2. . . . . . . . . . . . . . . . . . .    D  ADDR  00A0H     A   
+P20 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.0   A   
+P21 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.1   A   
+P22 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.2   A   
+P23 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.3   A   
+P24 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.4   A   
+P25 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.5   A   
+P26 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.6   A   
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    17
+
+P27 . . . . . . . . . . . . . . . . . .    B  ADDR  00A0H.7   A   
+P2DIR . . . . . . . . . . . . . . . . .    D  ADDR  00E6H     A   
+P2HD. . . . . . . . . . . . . . . . . .    D  ADDR  00C4H     A   
+P2PD. . . . . . . . . . . . . . . . . .    D  ADDR  0094H     A   
+P2PU. . . . . . . . . . . . . . . . . .    D  ADDR  00F6H     A   
+P3. . . . . . . . . . . . . . . . . . .    D  ADDR  00B0H     A   
+P30 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.0   A   
+P31 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.1   A   
+P32 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.2   A   
+P33 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.3   A   
+P34 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.4   A   
+P35 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.5   A   
+P36 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.6   A   
+P37 . . . . . . . . . . . . . . . . . .    B  ADDR  00B0H.7   A   
+P3DIR . . . . . . . . . . . . . . . . .    D  ADDR  00E7H     A   
+P3HD. . . . . . . . . . . . . . . . . .    D  ADDR  00C5H     A   
+P3PD. . . . . . . . . . . . . . . . . .    D  ADDR  0095H     A   
+P3PU. . . . . . . . . . . . . . . . . .    D  ADDR  00F7H     A   
+P4. . . . . . . . . . . . . . . . . . .    D  ADDR  00E8H     A   
+P40 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.0   A   
+P41 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.1   A   
+P42 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.2   A   
+P43 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.3   A   
+P44 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.4   A   
+P45 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.5   A   
+P46 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.6   A   
+P47 . . . . . . . . . . . . . . . . . .    B  ADDR  00E8H.7   A   
+P4DIR . . . . . . . . . . . . . . . . .    D  ADDR  008DH     A   
+P4HD. . . . . . . . . . . . . . . . . .    D  ADDR  00C6H     A   
+P4PD. . . . . . . . . . . . . . . . . .    D  ADDR  009CH     A   
+P4PU. . . . . . . . . . . . . . . . . .    D  ADDR  008EH     A   
+P5. . . . . . . . . . . . . . . . . . .    D  ADDR  0098H     A   
+P5DIR . . . . . . . . . . . . . . . . .    D  ADDR  00C1H     A   
+P5HD. . . . . . . . . . . . . . . . . .    D  ADDR  00C7H     A   
+P5PD. . . . . . . . . . . . . . . . . .    D  ADDR  00D2H     A   
+P5PU. . . . . . . . . . . . . . . . . .    D  ADDR  008FH     A   
+PAUSE_ENCODE. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?PAUSE_ENCODE?ENTRY
+PCON. . . . . . . . . . . . . . . . . .    D  ADDR  0087H     A   
+PIIC. . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.5   A   
+PLAY_LOG_BACKUP . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?PLAY_LOG_BACKUP?ENTRY
+PLLCON0 . . . . . . . . . . . . . . . .    D  ADDR  0099H     A   
+PLLCON1 . . . . . . . . . . . . . . . .    D  ADDR  009AH     A   
+PSFT. . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.6   A   
+PSPI. . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.4   A   
+PSW . . . . . . . . . . . . . . . . . .    D  ADDR  00D0H     A   
+PT0 . . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.0   A   
+PT1 . . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.1   A   
+PT2 . . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.2   A   
+PT3 . . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.3   A   
+PUART . . . . . . . . . . . . . . . . .    B  ADDR  00B8H.7   A   
+READ_RTC_REG. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?READ_RTC_REG?ENTRY
+RECORDING_END . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?RECORDING_END?ENTRY
+RS0 . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.3   A   
+RS1 . . . . . . . . . . . . . . . . . .    B  ADDR  00D0H.4   A   
+SEND_ALM_VOICE. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?SEND_ALM_VOICE?ENTRY
+SINT. . . . . . . . . . . . . . . . . .    D  ADDR  0091H     A   
+SP. . . . . . . . . . . . . . . . . . .    D  ADDR  0081H     A   
+SPH . . . . . . . . . . . . . . . . . .    D  ADDR  0089H     A   
+SPIBUF. . . . . . . . . . . . . . . . .    D  ADDR  00D3H     A   
+SPICON. . . . . . . . . . . . . . . . .    D  ADDR  00D1H     A   
+SPIDMAADR . . . . . . . . . . . . . . .    D  ADDR  00D6H     A   
+SPIDMACNT . . . . . . . . . . . . . . .    D  ADDR  00D5H     A   
+SPIDMACON . . . . . . . . . . . . . . .    D  ADDR  00D4H     A   
+STOP_CLOCK. . . . . . . . . . . . . . .    C  ADDR  970BH     A   
+STOP_ENCODE . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?STOP_ENCODE?ENTRY
+SUSPEND_SDMMC . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?SUSPEND_SDMMC?ENTRY
+AX51 MACRO ASSEMBLER  ENTRY                                                                 12/15/11 08:55:00 PAGE    18
+
+T0CNT . . . . . . . . . . . . . . . . .    D  ADDR  00A3H     A   
+T0CON . . . . . . . . . . . . . . . . .    D  ADDR  00A1H     A   
+T0PWM . . . . . . . . . . . . . . . . .    D  ADDR  00A5H     A   
+T1CNT . . . . . . . . . . . . . . . . .    D  ADDR  00B3H     A   
+T1CON . . . . . . . . . . . . . . . . .    D  ADDR  00B1H     A   
+T1PWM . . . . . . . . . . . . . . . . .    D  ADDR  00B5H     A   
+T2CNTH. . . . . . . . . . . . . . . . .    D  ADDR  00ABH     A   
+T2CNTL. . . . . . . . . . . . . . . . .    D  ADDR  00AAH     A   
+T2CON . . . . . . . . . . . . . . . . .    D  ADDR  00ADH     A   
+T2PWMH. . . . . . . . . . . . . . . . .    D  ADDR  00A7H     A   
+T2PWML. . . . . . . . . . . . . . . . .    D  ADDR  00A6H     A   
+T3CNTH. . . . . . . . . . . . . . . . .    D  ADDR  00BBH     A   
+T3CNTL. . . . . . . . . . . . . . . . .    D  ADDR  00BAH     A   
+T3CON . . . . . . . . . . . . . . . . .    D  ADDR  00BDH     A   
+T3PWMH. . . . . . . . . . . . . . . . .    D  ADDR  00B7H     A   
+T3PWML. . . . . . . . . . . . . . . . .    D  ADDR  00B6H     A   
+UFI_MASSSTORAGE . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?UFI_MASSSTORAGE?ENTRY
+USB_POLLING . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?USB_POLLING?ENTRY
+USB_SUSPEND . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?USB_SUSPEND?ENTRY
+USBCON0 . . . . . . . . . . . . . . . .    D  ADDR  00C8H     A   
+USBCON2 . . . . . . . . . . . . . . . .    D  ADDR  00E9H     A   
+UTBUF . . . . . . . . . . . . . . . . .    D  ADDR  00ECH     A   
+UTCON . . . . . . . . . . . . . . . . .    D  ADDR  00EAH     A   
+UTSTA . . . . . . . . . . . . . . . . .    D  ADDR  00EBH     A   
+WAV_DECODE. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WAV_DECODE?ENTRY
+WAV_GET_FRAME_SAMPLE_SIZE . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WAV_GET_FRAME_SAMPLE_SIZE?ENTRY
+WAV_INPUT_DATA. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WAV_INPUT_DATA?ENTRY
+WDT_CLEAR . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WDT_CLEAR?ENTRY
+WMA_DECODE. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMA_DECODE?ENTRY
+WMA_DECODE_BLOCK. . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMA_DECODE_BLOCK?ENTRY
+WMA_DECODE_INIT . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMA_DECODE_INIT?ENTRY
+WMA_STREAM_LEN. . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMA_STREAM_LEN?ENTRY
+WMA_STREAM_START_ADDRESS. . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMA_STREAM_START_ADDRESS?ENTRY
+WMACHEAK_LOG. . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMACHEAK_LOG?ENTRY
+WMAFILLBUF. . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMAFILLBUF?ENTRY
+WMASTRPAK . . . . . . . . . . . . . . .    C  ADDR  0000H     R   SEG=?PR?WMASTRPAK?ENTRY
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S).
