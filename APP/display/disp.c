@@ -131,11 +131,13 @@ void set_brightness(u8 br)
 /*----------------------------------------------------------------------------*/
 void set_brightness_fade_out(void)
 {
+#ifndef NO_LED_BRIGHTNESS_FADEOUT
     if (bright_counter < 20)
     {
         bright_counter++;
         set_brightness(23 - bright_counter);
     }
+#endif	
 }
 
 /*----------------------------------------------------------------------------*/

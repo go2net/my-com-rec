@@ -583,6 +583,10 @@ void music_play(void)
                 mad_control(MAD_PLAY, 0);
                 play_status = MAD_PLAY;		
                 ext_amp_mute(EXT_AMP_UNMUTE);
+#if defined(USE_AMP_MODE_SELECT_FOR_NS4160)
+		NS4160_AMP_GPIO_INIT();
+		D_CLASS_AMP_SEL();
+#endif	
 
 #if defined(LED_RUN_FAST_WHEN_PLAY_MODE_AT_REP_ONE)	
 		if(play_mode == REPEAT_ONE){

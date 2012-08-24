@@ -88,6 +88,10 @@
 #define AMP_MUTE_PORT_INIT() 	 P0DIR &= ~(BIT(3));P0PU |=(BIT(3))//;P0PD &= ~(BIT(3))
 #define AMP_MUTE_DISABLE() 	 	 P03 = UNMUTE_LEVEL
 #define AMP_MUTE_ENABLE() 	 	 P03 = MUTE_LEVEL
+#elif defined(MUTE_PORT_USE_P07)
+#define AMP_MUTE_PORT_INIT() 	 P0DIR &= ~(BIT(7));P0PU |=(BIT(7))//;P0PD &= ~(BIT(3))
+#define AMP_MUTE_DISABLE() 	 	 P07 = MUTE_LEVEL
+#define AMP_MUTE_ENABLE() 	 	 P07 = UNMUTE_LEVEL
 #elif defined(MUTE_PORT_USE_WKUP)
 //dummy
 #elif defined(MUTE_PORT_USE_P25)
@@ -289,6 +293,10 @@
 #define D_CLASS_AMP_HIGH()				P0|=(BIT(7))
 #define D_CLASS_AMP_LOW()				P0&=~(BIT(7))
 #endif
+#elif defined(USE_AMP_MODE_SELECT_FOR_NS4160)
+#define NS4160_AMP_GPIO_INIT()		P0DIR &= ~(BIT(7));P0PU |=BIT(7);
+#define AB_AMP_SEL()					P07 =0;_nop_();_nop_();_nop_();P07 =1;
+#define D_CLASS_AMP_SEL()				P07 =0;_nop_();_nop_();_nop_();P07 =1;_nop_();_nop_();_nop_();P07 =0;_nop_();_nop_();_nop_();P07 =1;
 #endif
 
 #ifdef MICPHONE_GPIO_DETECTION
