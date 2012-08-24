@@ -1,0 +1,468 @@
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE PLL_SET
+OBJECT MODULE PLACED IN .\output\pll_set.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE lib\pll_set.c OBJECTADVANCED OPTIMIZE(9,SPEED) ORDER NOAREGS INCDIR(.\displ
+                    -ay;.\main;.\music;.\rtc;.\usb_device;.\fm_receive;.\key;.\aux_fun;.\lib;.\msg;.\iic;.\aux_fun;.\usb_device;.\encode;.\ou
+                    -tput) DEBUG CODE PRINT(.\output\pll_set.lst) OBJECT(.\output\pll_set.obj)
+
+line level    source
+
+   1          #include "pll_set.h"
+   2          
+   3          
+   4          void delay_timer10ms(u8 cou)
+   5          {
+   6   1          u8 i;
+   7   1          T2CON = 0;
+   8   1          T2CNTL = 0;
+   9   1          T2CNTH = 0;
+  10   1              for(i = 0; i < cou; i++)                                        //about 100ms
+  11   1              {
+  12   2                  T2CON = 0x01;                                                       // counter sytem clock    
+  13   2                      while ((T2CON & BIT(7)) == 0)
+  14   2              {
+  15   3      
+  16   3              }
+  17   2                      
+  18   2      //          T2CNTL = 0;
+  19   2      //          T2CNTH = 0;
+  20   2              }
+  21   1          T2CON = 0;          
+  22   1      }
+  23          
+  24          void timer_sys(void)
+  25          {
+  26   1          T2CON = 0;
+  27   1          T2CNTL = 0;
+  28   1          T2CNTH = 0;
+  29   1          T3CNTL = 0;
+  30   1          T3CNTH = 0;
+  31   1          T2CON = 0x01;                                                       // counter sytem clock    
+  32   1              T3CON = 0x09;
+  33   1              while ((T2CON & BIT(7)) == 0)
+  34   1          {
+  35   2      
+  36   2          }
+  37   1              T3CON = 0x00;
+  38   1          T2CON = 0;          
+  39   1              
+  40   1      }
+  41          
+  42          
+  43          void deal_clk(void)
+  44          {
+  45   1              u16 sys_cnt;
+  46   1              u16 timer_clk;
+  47   1              u8 i;
+  48   1      
+  49   1              i = T1CNT;
+  50   1              T2SCA = 0x07;                                                   
+  51   1              /////// 
+  52   1          T2PRD = 0x0e;                                                       //delay about 0.01s every overflow
+  53   1          T2PRD = 0xa6;
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 2   
+
+  54   1      
+  55   1              P0PU = 0;
+  56   1          P0PD = 0;
+  57   1          P0DIR = 0xff;
+  58   1          CLKCON0 |= BIT(1);                      //¿ªP00¡¢P01 OSC
+  59   1              delay_timer10ms(50);
+  60   1      
+  61   1              T3CON = 0;
+  62   1              T3SCA = 0X02;                                                           // 16.8M / 32768                                        
+  63   1          T3PRD = 0xFF;                                                       //delay about 0.01s every overflow      
+  64   1              T3PRD = 0xFF;
+  65   1              T3CNTL = 0;
+  66   1              T3CNTH = 0;
+  67   1              /*
+  68   1              uart_init();
+  69   1              while(1)
+  70   1              {
+  71   1                      T3CON = 0x09;
+  72   1                      delay_timer10ms(1);
+  73   1                      T3CON = 0x00;
+  74   1                      putbyte(T3CNTH);
+  75   1                      putbyte(T3CNTL);
+  76   1              }
+  77   1              //*/
+  78   1              timer_sys();
+  79   1              sys_cnt = 0;
+  80   1          ((u8 *)(&sys_cnt))[0] = T3CNTH;
+  81   1              ((u8 *)(&sys_cnt))[1] = T3CNTL;
+  82   1      
+  83   1              if((sys_cnt>40000) || (sys_cnt < 20000)) 
+  84   1              {
+  85   2                  CLKCON0 &= ~BIT(1);                      //¹ØP00¡¢P01 OSC
+  86   2                      T2CON = 0;
+  87   2                      T3CON = 0;
+  88   2                      return;
+  89   2              }
+  90   1              if((sys_cnt>(30000 - 25)) && (sys_cnt < (30000 + 25))) 
+  91   1              {
+  92   2                  CLKCON0 &= ~BIT(1);
+  93   2                      T2CON = 0;
+  94   2                      T3CON = 0;
+  95   2                      return;
+  96   2              }
+  97   1              ////////////////
+  98   1              {
+  99   2                      u8 _code *ptr = 0x7ff9;
+ 100   2                      ptr -= (i*2);
+ 101   2                  ((u8 *)(&timer_clk))[0] = *(ptr);           //H
+ 102   2                      ((u8 *)(&timer_clk))[1] = *(ptr - 1);   //L
+ 103   2              }
+ 104   1      
+ 105   1              if(sys_cnt>30000)
+ 106   1              {
+ 107   2                      timer_clk += ((sys_cnt - 30000) + 25)/50;
+ 108   2              }
+ 109   1              if(sys_cnt < 30000)
+ 110   1              {
+ 111   2                      timer_clk -= ((30000 - sys_cnt) + 25)/50;
+ 112   2              }
+ 113   1              CLKCON1 &= ~BIT(5);
+ 114   1          PLLCON0 = ((u8 *)(&timer_clk))[1];  //L                                     
+ 115   1          PLLCON1 = ((u8 *)(&timer_clk))[0];  //H
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 3   
+
+ 116   1              delay(1000);
+ 117   1              CLKCON1 |= BIT(5);
+ 118   1              T2CON = 0;
+ 119   1              T3CON = 0;
+ 120   1              CLKCON0 &= ~BIT(1);
+ 121   1      }
+ 122          
+ 123          
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 4   
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+
+             ; FUNCTION _delay_timer10ms (BEGIN)
+                                           ; SOURCE LINE # 4
+;---- Variable 'cou' assigned to Register 'R7' ----
+                                           ; SOURCE LINE # 5
+                                           ; SOURCE LINE # 7
+                       CLR     A
+                       MOV     T2CON,A
+                                           ; SOURCE LINE # 8
+                       MOV     T2CNTL,A
+                                           ; SOURCE LINE # 9
+                       MOV     T2CNTH,A
+                                           ; SOURCE LINE # 10
+;---- Variable 'i' assigned to Register 'R6' ----
+                       MOV     R6,A
+             ?C0001:
+                       MOV     A,R6
+                       CLR     C
+                       SUBB    A,R7
+                 R     xJGE    ?C0002
+                                           ; SOURCE LINE # 11
+                                           ; SOURCE LINE # 12
+                       MOV     T2CON,#01H
+             ?C0004:
+                                           ; SOURCE LINE # 13
+                       MOV     A,T2CON
+                 R     xJNB    ACC.7,?C0004
+                                           ; SOURCE LINE # 14
+                                           ; SOURCE LINE # 16
+             ?C0005:
+                                           ; SOURCE LINE # 20
+             ?C0003:
+                       INC     R6
+                 R     xJMP    ?C0001
+             ?C0002:
+                                           ; SOURCE LINE # 21
+                       CLR     A
+                       MOV     T2CON,A
+                                           ; SOURCE LINE # 22
+                       RET     
+             ; FUNCTION _delay_timer10ms (END)
+
+             ; FUNCTION timer_sys (BEGIN)
+                                           ; SOURCE LINE # 24
+                                           ; SOURCE LINE # 25
+                                           ; SOURCE LINE # 26
+                       CLR     A
+                       MOV     T2CON,A
+                                           ; SOURCE LINE # 27
+                       MOV     T2CNTL,A
+                                           ; SOURCE LINE # 28
+                       MOV     T2CNTH,A
+                                           ; SOURCE LINE # 29
+                       MOV     T3CNTL,A
+                                           ; SOURCE LINE # 30
+                       MOV     T3CNTH,A
+                                           ; SOURCE LINE # 31
+                       MOV     T2CON,#01H
+                                           ; SOURCE LINE # 32
+                       MOV     T3CON,#09H
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 5   
+
+             ?C0007:
+                                           ; SOURCE LINE # 33
+                       MOV     A,T2CON
+                 R     xJNB    ACC.7,?C0007
+                                           ; SOURCE LINE # 34
+                                           ; SOURCE LINE # 36
+             ?C0008:
+                                           ; SOURCE LINE # 37
+                       CLR     A
+                       MOV     T3CON,A
+                                           ; SOURCE LINE # 38
+                       MOV     T2CON,A
+                                           ; SOURCE LINE # 40
+                       RET     
+             ; FUNCTION timer_sys (END)
+
+             ; FUNCTION deal_clk (BEGIN)
+                                           ; SOURCE LINE # 43
+                                           ; SOURCE LINE # 44
+                                           ; SOURCE LINE # 49
+                 R     MOV     i,T1CNT
+                                           ; SOURCE LINE # 50
+                       MOV     DPTR,#0FF26H
+                       MOV     A,#07H
+                       MOVX    @DPTR,A
+                                           ; SOURCE LINE # 52
+                       MOV     DPTR,#0FF22H
+                       MOV     A,#0EH
+                       MOVX    @DPTR,A
+                                           ; SOURCE LINE # 53
+                       MOV     A,#0A6H
+                       MOVX    @DPTR,A
+                                           ; SOURCE LINE # 55
+                       CLR     A
+                       MOV     P0PU,A
+                                           ; SOURCE LINE # 56
+                       MOV     P0PD,A
+                                           ; SOURCE LINE # 57
+                       MOV     P0DIR,#0FFH
+                                           ; SOURCE LINE # 58
+                       ORL     CLKCON0,#02H
+                                           ; SOURCE LINE # 59
+                       MOV     R7,#032H
+                 R     CALL    _delay_timer10ms
+                                           ; SOURCE LINE # 61
+                       CLR     A
+                       MOV     T3CON,A
+                                           ; SOURCE LINE # 62
+                       MOV     DPTR,#0FF27H
+                       MOV     A,#02H
+                       MOVX    @DPTR,A
+                                           ; SOURCE LINE # 63
+                       MOV     DPTR,#0FF23H
+                       MOV     A,#0FFH
+                       MOVX    @DPTR,A
+                                           ; SOURCE LINE # 64
+                       MOVX    @DPTR,A
+                                           ; SOURCE LINE # 65
+                       CLR     A
+                       MOV     T3CNTL,A
+                                           ; SOURCE LINE # 66
+                       MOV     T3CNTH,A
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 6   
+
+                                           ; SOURCE LINE # 78
+                 R     CALL    timer_sys
+                                           ; SOURCE LINE # 79
+                       CLR     A
+                 R     MOV     sys_cnt,A
+                 R     MOV     sys_cnt+01H,A
+                                           ; SOURCE LINE # 80
+                 R     MOV     sys_cnt,T3CNTH
+                                           ; SOURCE LINE # 81
+                 R     MOV     sys_cnt+01H,T3CNTL
+                                           ; SOURCE LINE # 83
+                 R     MOV     R6,sys_cnt
+                 R     MOV     R7,sys_cnt+01H
+                       MOV     R4,A
+                       MOV     R5,A
+                       MOV     R3,#040H
+                       MOV     R2,#09CH
+                       MOV     R1,A
+                       MOV     R0,A
+                       CLR     C
+                 E     CALL    ?C?SLCMP
+                 R     xJLT    ?C0016
+                 R     MOV     A,sys_cnt+01H
+                       SUBB    A,#020H
+                 R     MOV     A,sys_cnt
+                       SUBB    A,#04EH
+                 R     xJGE    ?C0010
+             ?C0011:
+                                           ; SOURCE LINE # 84
+                                           ; SOURCE LINE # 85
+                                           ; SOURCE LINE # 86
+                                           ; SOURCE LINE # 87
+                 R     xJMP    ?C0016
+                                           ; SOURCE LINE # 89
+             ?C0010:
+                                           ; SOURCE LINE # 90
+                       SETB    C
+                 R     MOV     A,sys_cnt+01H
+                       SUBB    A,#017H
+                 R     MOV     A,sys_cnt
+                       SUBB    A,#075H
+                 R     xJLT    ?C0013
+                 R     MOV     A,sys_cnt+01H
+                       SUBB    A,#049H
+                 R     MOV     A,sys_cnt
+                       SUBB    A,#075H
+                 R     xJGE    ?C0013
+                                           ; SOURCE LINE # 91
+                                           ; SOURCE LINE # 92
+             ?C0016:
+                       ANL     CLKCON0,#0FDH
+                                           ; SOURCE LINE # 93
+                       CLR     A
+                       MOV     T2CON,A
+                                           ; SOURCE LINE # 94
+                       MOV     T3CON,A
+                       RET     
+                                           ; SOURCE LINE # 96
+             ?C0013:
+                                           ; SOURCE LINE # 98
+                                           ; SOURCE LINE # 99
+                 R     MOV     ptr,#07FH
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 7   
+
+                 R     MOV     ptr+01H,#0F9H
+                                           ; SOURCE LINE # 100
+                 R     MOV     A,i
+                       MOV     B,#02H
+                       MUL     AB
+                       MOV     R7,A
+                       CLR     C
+                       CLR     A
+                       SUBB    A,R7
+                       MOV     R7,A
+                       CLR     A
+                       SUBB    A,B
+                       MOV     R6,A
+                       MOV     A,R7
+                 R     ADD     A,ptr+01H
+                 R     MOV     ptr+01H,A
+                       MOV     A,R6
+                 R     ADDC    A,ptr
+                 R     MOV     ptr,A
+                                           ; SOURCE LINE # 101
+                 R     MOV     DPL,ptr+01H
+                       MOV     DPH,A
+                       CLR     A
+                       MOVC    A,@A+DPTR
+                 R     MOV     timer_clk,A
+                                           ; SOURCE LINE # 102
+                       MOV     A,DPL
+                       ADD     A,#0FFH
+                       MOV     DPL,A
+                       MOV     A,DPH
+                       ADDC    A,#0FFH
+                       MOV     DPH,A
+                       CLR     A
+                       MOVC    A,@A+DPTR
+                 R     MOV     timer_clk+01H,A
+                                           ; SOURCE LINE # 103
+                                           ; SOURCE LINE # 105
+                       SETB    C
+                 R     MOV     A,sys_cnt+01H
+                       SUBB    A,#030H
+                 R     MOV     A,sys_cnt
+                       SUBB    A,#075H
+                 R     xJLT    ?C0014
+                                           ; SOURCE LINE # 106
+                                           ; SOURCE LINE # 107
+                 R     MOV     A,sys_cnt+01H
+                       ADD     A,#0E9H
+                       MOV     R7,A
+                 R     MOV     A,sys_cnt
+                       ADDC    A,#08AH
+                       MOV     R6,A
+                       MOV     R4,#00H
+                       MOV     R5,#032H
+                 E     CALL    ?C?UIDIV
+                       MOV     A,R7
+                 R     ADD     A,timer_clk+01H
+                 R     MOV     timer_clk+01H,A
+                       MOV     A,R6
+                 R     ADDC    A,timer_clk
+                 R     MOV     timer_clk,A
+                                           ; SOURCE LINE # 108
+             ?C0014:
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 8   
+
+                                           ; SOURCE LINE # 109
+                       CLR     C
+                 R     MOV     A,sys_cnt+01H
+                       SUBB    A,#030H
+                 R     MOV     A,sys_cnt
+                       SUBB    A,#075H
+                 R     xJGE    ?C0015
+                                           ; SOURCE LINE # 110
+                                           ; SOURCE LINE # 111
+                       CLR     C
+                       MOV     A,#049H
+                 R     SUBB    A,sys_cnt+01H
+                       MOV     R7,A
+                       MOV     A,#075H
+                 R     SUBB    A,sys_cnt
+                       MOV     R6,A
+                       MOV     R4,#00H
+                       MOV     R5,#032H
+                 E     CALL    ?C?UIDIV
+                       CLR     C
+                 R     MOV     A,timer_clk+01H
+                       SUBB    A,R7
+                 R     MOV     timer_clk+01H,A
+                 R     MOV     A,timer_clk
+                       SUBB    A,R6
+                 R     MOV     timer_clk,A
+                                           ; SOURCE LINE # 112
+             ?C0015:
+                                           ; SOURCE LINE # 113
+                       ANL     CLKCON1,#0DFH
+                                           ; SOURCE LINE # 114
+                 R     MOV     PLLCON0,timer_clk+01H
+                                           ; SOURCE LINE # 115
+                 R     MOV     PLLCON1,timer_clk
+                                           ; SOURCE LINE # 116
+                       MOV     R7,#0E8H
+                       MOV     R6,#03H
+                 E     CALL    _delay
+                                           ; SOURCE LINE # 117
+                       ORL     CLKCON1,#020H
+                                           ; SOURCE LINE # 118
+                       CLR     A
+                       MOV     T2CON,A
+                                           ; SOURCE LINE # 119
+                       MOV     T3CON,A
+                                           ; SOURCE LINE # 120
+                       ANL     CLKCON0,#0FDH
+                                           ; SOURCE LINE # 121
+             ?C0012:
+                       RET     
+             ; FUNCTION deal_clk (END)
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    376    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       7
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.00   PLL_SET                                                               12/15/2011 08:55:00 PAGE 9   
+
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
