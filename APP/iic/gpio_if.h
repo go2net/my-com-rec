@@ -294,9 +294,9 @@
 #define D_CLASS_AMP_LOW()				P0&=~(BIT(7))
 #endif
 #elif defined(USE_AMP_MODE_SELECT_FOR_NS4160)
-#define NS4160_AMP_GPIO_INIT()		P0DIR &= ~(BIT(7));P0PU |=BIT(7);
-#define AB_AMP_SEL()					P07 =0;_nop_();_nop_();_nop_();P07 =1;
-#define D_CLASS_AMP_SEL()				P07 =0;_nop_();_nop_();_nop_();P07 =1;_nop_();_nop_();_nop_();P07 =0;_nop_();_nop_();_nop_();P07 =1;
+#define NS4160_AMP_GPIO_INIT()			P0DIR &= ~(BIT(7));P0PU |=BIT(7);
+#define AB_AMP_SEL()					P07 =0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();P07 =1;
+#define D_CLASS_AMP_SEL()				P07 =0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();P07 =1;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();P07 =0;_nop_();_nop_();_nop_();_nop_();_nop_();_nop_();P07 =1;
 #endif
 
 #ifdef MICPHONE_GPIO_DETECTION

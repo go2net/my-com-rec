@@ -438,15 +438,45 @@ void disp_scan(void)
     }
     com = BIT(cnt); 
     /**/
+    
+#ifdef LED_CUSTOM_SCAN_HARDWARE
+
     LED_COM &= ~0x1f;
     LED_COM_MASK &= ~0x1f;
     LED_SEG |= 0x7f;			 //清LED COM SEG
-    
-#ifdef LED_CUSTOM_SCAN_HARDWARE
+	
     align_seg_gpio(~seg);
     LED_COM |= align_com_gpio[cnt];
     LED_COM_MASK |= align_com_gpio[cnt];
+
+#elif defined(COMMON_CATHODE)
+
+#if defined(LED_COMMON_SCAN_COM_USE_P17)
+    LED_COM |= 0x0f;
+    LED_COM_MASK &= ~0x0f;
+    LED_SEG =0x80;			 //清LED COM SEG	
+    P1PD &=~(BIT(7));
+
+    LED_SEG |=(seg&0x7F);
+    LED_COM &=~com;
+    P17=((com&0x10)>0)?0:1;
+    P1PD |=((com&0x10)>0)?0:BIT(7);
+    LED_COM_PD_MASK |= com;
 #else
+    LED_COM |= 0x1f;
+    LED_COM_MASK &= ~0x1f;
+    LED_SEG &=~0x7f;			 //清LED COM SEG	
+
+    LED_SEG |=seg;
+    LED_COM &=~com;
+    LED_COM_PD_MASK |= com;
+#endif	
+#else
+
+    LED_COM &= ~0x1f;
+    LED_COM_MASK &= ~0x1f;
+    LED_SEG |= 0x7f;			 //清LED COM SEG
+	
     LED_SEG &= ~seg;
     LED_COM |= com;
     LED_COM_MASK |= com;
