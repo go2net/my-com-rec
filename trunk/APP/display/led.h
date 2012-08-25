@@ -286,6 +286,7 @@ extern _idata u8 LED_FLASH[5];
 #define LED_COM    P3
 
 #define LED_COM_MASK   P3PU
+#define LED_COM_PD_MASK   P3PD
 
 #define LED_SEG    P1
 
