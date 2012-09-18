@@ -104,6 +104,10 @@ void ext_amp_mute(bool mute);
 #define EXT_AMP_MUTE		1
 #define EXT_AMP_UNMUTE	0
 
+#if defined(ONE_WIRE_TUNE_ENABLE)
+void one_wire_ctrl_if(u8 pulse_num);
+#endif
+
 #endif
 
 
