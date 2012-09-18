@@ -65,13 +65,12 @@ void extended_aux_select()
 void aux_main(void)
 {
     u8 key;
-	
-	ext_amp_mute(EXT_AMP_UNMUTE);	
-	
+
 #if defined(USE_AMP_MODE_SELECT_FOR_NS4160)
 	NS4160_AMP_GPIO_INIT();
 	D_CLASS_AMP_SEL();
 #endif	
+    ext_amp_mute(EXT_AMP_UNMUTE);	
 
     while (1)
     {

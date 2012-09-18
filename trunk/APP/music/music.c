@@ -584,8 +584,8 @@ void music_play(void)
                 play_status = MAD_PLAY;		
                 ext_amp_mute(EXT_AMP_UNMUTE);
 #if defined(USE_AMP_MODE_SELECT_FOR_NS4160)
-		NS4160_AMP_GPIO_INIT();
-		D_CLASS_AMP_SEL();
+		  NS4160_AMP_GPIO_INIT();
+		  D_CLASS_AMP_SEL();
 #endif	
 
 #if defined(LED_RUN_FAST_WHEN_PLAY_MODE_AT_REP_ONE)	
@@ -890,6 +890,12 @@ void music_play(void)
 /*----------------------------------------------------------------------------*/
 void music_decode(void)
 {
+
+#if defined(USE_AMP_MODE_SELECT_FOR_NS4160)
+	NS4160_AMP_GPIO_INIT();
+	D_CLASS_AMP_SEL();
+#endif			
+
     input_number_en = 1;									//允许数字输入功能
     vol_change_en=1;
     enable_key_tone_flag(1);
