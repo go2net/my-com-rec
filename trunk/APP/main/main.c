@@ -451,6 +451,7 @@ void sys_init(void)
     enable_interrupt();
     flashled(LED_ON);
 }
+#ifndef NO_IDLE_MODE_FUNC
 void idle_mode(void)
 {
     u8 key;
@@ -580,6 +581,7 @@ void idle_mode(void)
     }
 
 }
+#endif
 void main(void)
 {
     ext_amp_mute(EXT_AMP_MUTE);
@@ -629,10 +631,11 @@ void main(void)
         case REC_MIC_MODE:
             rec_mic_fun();
             break;
-			
+#ifndef NO_IDLE_MODE_FUNC		
         case IDLE_MODE:
             idle_mode();
             break;		
+#endif			
         default:
             work_mode = MUSIC_MODE;
             break;

@@ -255,6 +255,8 @@ void save_music_point(void)
    @note static bool load_music_point(void)
 */
 /*----------------------------------------------------------------------------*/
+#if (BREAK_POINT_PLAY_EN == 1)
+
 static bool load_music_point(void)
 {
     get_rec_mem_info();
@@ -279,6 +281,7 @@ static bool load_music_point(void)
     }
     return 1;
 }
+#endif
 /*----------------------------------------------------------------------------*/
 /**@brief 从EEPROM中读出断点信息，并初始化解码变量
    @param 无

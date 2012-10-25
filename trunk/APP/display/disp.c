@@ -477,7 +477,7 @@ void disp_aux(void)
 #ifdef DISP_LINE_STR
     printf_str("LINE",0);
 #elif defined(EXTENDED_AUX_FUNC)
-    printf_str("AUX",0);
+    printf_str("AU-",0);
     printf_num(extended_aux_sel,3,1);
 #else
     printf_str(" AUX",0);
@@ -735,9 +735,11 @@ void disp_port(u8 menu)
         case MENU_POWER_UP:
             disp_power_on();
             break;
+#ifdef POWER_OFF_IN_IDEL		
         case MENU_POWER_OFF:
             disp_power_off();
             break;
+#endif			
         case MENU_NODEVICE:
             disp_no_device();
             break;
