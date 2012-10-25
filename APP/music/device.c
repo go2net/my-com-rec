@@ -80,6 +80,12 @@ u8 device_init(void)
     device_check();
     if (device_active & device_online)  ///<当前需要活动的设备在线
     {
+#ifdef DISP_REC_IN_ENCODE_MODE
+	if(encode_status>0){
+		disp_port(MENU_REC);
+	}
+	else
+#endif
         disp_port(MENU_SCAN_DISK);
 
         stop_decode();

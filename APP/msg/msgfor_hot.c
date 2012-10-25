@@ -391,6 +391,8 @@ void ap_handle_hotkey(u8 key)
             put_msg_lifo(MSG_REC_STOP);
 #if defined(INDEPENDENT_REC_LED)
 	     rec_flash_led(LED_OFF);
+#elif defined(PLAY_STATUS_SPARK_WHEN_RECORDING)
+    	 flashled(LED_SPARK_FAST);	
 #else
     	     flashled(LED_ON);						
 #endif
@@ -494,6 +496,8 @@ void ap_handle_hotkey(u8 key)
 #if defined(INDEPENDENT_REC_LED)
     	     flashled(LED_OFF);			
 	     rec_flash_led(LED_SPARK_FAST);
+#elif defined(PLAY_STATUS_SPARK_WHEN_RECORDING)
+    	 flashled(LED_SPARK_FAST);	
 #endif
        //init_rec_name();
         device_active |= VIRTUAL_DEVICE;

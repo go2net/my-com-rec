@@ -98,9 +98,9 @@ void aux_main(void)
 
 #ifdef EXTENDED_AUX_FUNC
     case MSG_NEXT_WORKMODE:
-	extended_aux_sel++;
+	extended_aux_sel--;
 	
-	if(extended_aux_sel>3){
+	if(extended_aux_sel<1){
 		goto __HOT_KEY_HDLR;
 	}
 	extended_aux_select();
@@ -219,7 +219,7 @@ void aux_fun(void)
 #endif	
 
 #ifdef EXTENDED_AUX_FUNC
-	extended_aux_sel=1;
+	extended_aux_sel=3;
 	extended_aux_select();
 #endif
 

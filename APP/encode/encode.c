@@ -232,8 +232,8 @@ void break_encode(void)
 #endif
     switch (encode_status)
     {
-    case RECODE_STOP:
-        break;
+    //case RECODE_STOP:
+    //    break;
     case RECODE_PLAY:
         if(REC_MIC_MODE != work_mode)
         {
@@ -252,8 +252,8 @@ void break_encode(void)
     case RECODE_PAUSE:
         api_stop_encode();
         break;
-    default :
-        break;
+    //default :
+     //   break;
     }
 }
 
