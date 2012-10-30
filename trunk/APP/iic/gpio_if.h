@@ -19,6 +19,10 @@
 #define rec_led_gpio_init()				P0DIR &= ~(BIT(4));P0PU |=(BIT(4))//;//P0PD &= ~(BIT(4))
 #define REC_LED_GPIO_CTRL_OFF()		P04 = 0
 #define REC_LED_GPIO_CTRL_ON()			P04 = 1
+#elif defined(REC_LED_GPIO_USE_P07)
+#define rec_led_gpio_init()				P0DIR &= ~(BIT(7));P0PU |=(BIT(7))//;//P0PD &= ~(BIT(4))
+#define REC_LED_GPIO_CTRL_OFF()		P07 = 0
+#define REC_LED_GPIO_CTRL_ON()			P07 = 1
 #elif defined(REC_LED_GPIO_USE_P01)
 #define rec_led_gpio_init()				P0DIR &= ~(BIT(1));P0PU |=(BIT(1));P0PD &= ~(BIT(1))
 #define REC_LED_GPIO_CTRL_OFF()		P01 = 0
