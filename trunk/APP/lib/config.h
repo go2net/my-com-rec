@@ -13,7 +13,7 @@
 
 #define MUTE_CTRL_LEVEL_NORMAL
 //#define NO_IR_REMOTE
-//#define DEFAULT_VOL		0
+//#define DEFAULT_VOL		30
 //#define INDEPENDENT_REC_LED
 
 //#define IIC_GPIO_USE_P00_P01
@@ -63,13 +63,13 @@
 //#define K1189_AJR_LSK8_REC_V001
 //#define K0000_XFW_GL005_REC_V001
 //#define K1181_YDT_1181_REC_V001
-// #define K0000_GW_613_REC_V001
+//#define K0000_GW_613_REC_V001
 
 #if defined(K0000_GW_613_REC_V001)
 
 #define IIC_GPIO_USE_P00_P01
 #define LED_USE_NORMAL_4X8
-#if 0
+#if 1
 #define COMMON_CATHODE	
 #define GUOWEI_ADKEY_RES_1
 #endif

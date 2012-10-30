@@ -478,9 +478,9 @@ void ap_handle_hotkey(u8 key)
                 given_device = read_info(MEM_ACTIVE_DEV);
             }
         }
-       // if(((given_device & (~VIRTUAL_DEVICE))  != DEVICE_SDMMC0) && ((given_device & (~VIRTUAL_DEVICE)) != DEVICE_UDISK))
+        if(((given_device & (~VIRTUAL_DEVICE))  != DEVICE_SDMMC0) && ((given_device & (~VIRTUAL_DEVICE)) != DEVICE_UDISK))
         {
-        //    given_device = DEVICE_SDMMC0;
+            given_device = DEVICE_SDMMC0;
         }
         SYSTEM_CLK_DIV2();
 
