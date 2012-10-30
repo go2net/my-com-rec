@@ -981,7 +981,7 @@ void disp_dled(void)
 #endif
 #ifdef MUSIC_NO_PLAY_LED
 	return;
-#endif
+#else
 	if(LED_OFF == led_flag)
 	{
 	   dled_ctl(0);
@@ -1024,6 +1024,8 @@ void disp_dled(void)
 	{
 	    dled_ctl(1);
 	}
+#endif
+	
 }
 #endif
 

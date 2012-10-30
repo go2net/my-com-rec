@@ -499,7 +499,7 @@ void ap_handle_hotkey(u8 key)
 #elif defined(PLAY_STATUS_SPARK_WHEN_RECORDING)
     	 flashled(LED_SPARK_FAST);	
 #endif
-       //init_rec_name();
+       init_rec_name();
         device_active |= VIRTUAL_DEVICE;
         encode_device = device_active;	 //…Ë÷√¬º“Ù¥Ê¥¢…Ë±∏
         write_file_info(0);
