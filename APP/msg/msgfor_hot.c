@@ -666,8 +666,11 @@ void ap_handle_hotkey(u8 key)
                  (res == NO_DEV_ONLINE))                    //无可播放的设备
         {	
 
+#if defined(INDEPENDENT_REC_LED)
+    	     rec_flash_led(LED_OFF);			
+#else
             flashled(LED_ON);			
-
+#endif
             if(RECODE_STOP != encode_status)
             {
                 encode_status = RECODE_STOP;
