@@ -306,6 +306,21 @@ void LED_SEG_OUT(u8 SEG_Data)
  	P12=((SEG_Data&SEG_F)>0)?0:1;
  	P15=((SEG_Data&SEG_G)>0)?0:1;
 }
+#elif defined(K0000_BHT_C202_REC_V001)
+void LED_COM_OUT(u8 COM_Data)
+{
+ 	P31 =((COM_Data&0x01)>0)?1:0;
+ 	P32 =((COM_Data&0x02)>0)?1:0;
+ 	P33 =((COM_Data&0x04)>0)?1:0;
+ 	P34 =((COM_Data&0x08)>0)?1:0;
+ 	P30 =((COM_Data&0x10)>0)?1:0;
+}
+void LED_SEG_OUT(u8 SEG_Data)
+{
+    	LED_COM &= ~0x0f;
+	LED_SEG &=~0x7F;
+       LED_SEG |=(SEG_Data&0x7F);
+}
 #else
 void LED_COM_OUT(u8 COM_Data)
 {
