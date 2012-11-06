@@ -73,6 +73,7 @@
 
 #define ADKEY_PORT_P06
 #define LED_GPIO_USE_P04
+#define DISP_HI_NO_BAR
 
 #define LED_GPIO_PORT_CUSTOMERIZED
 
@@ -82,7 +83,7 @@
 #define MUTE_PORT_USE_P01
 #define EXCHANGE_AUX_CHANNEL
 
-#define FM_USE_AR1015
+#define FM_USE_BK1080
 
 #endif
 
