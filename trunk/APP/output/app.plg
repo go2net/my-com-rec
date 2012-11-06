@@ -3,8 +3,8 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Project:</h2>
-F:\comm_rec\APP\app.uvproj
-Project File Date:  08/24/2012
+F:\bak\rec\APP\app.uvproj
+Project File Date:  11/06/2012
 
 <h2>Output:</h2>
 Build target 'app'
@@ -18,6 +18,8 @@ MAIN\MAIN.C(400): warning C280: 'i': unreferenced local variable
 compiling uart.c...
 compiling clock.c...
 compiling disp.c...
+DISPLAY\DISP.C(382): warning C209: '_led_disp_icon': too few actual parameters
+DISPLAY\DISP.C(452): warning C209: '_led_disp_icon': too few actual parameters
 compiling led.c...
 DISPLAY\LED.C(185): warning C280: 'br': unreferenced local variable
 compiling fm_receive.c...
@@ -45,22 +47,22 @@ linking...
     CALLER1: TIMER3ISR/KEY
     CALLER2: ?C_C51STARTUP
 *** WARNING L9: EMPTY SEGMENTS ENCOUNTERED
-Program Size: data=130.5 xdata=12412 const=663 code=9713
+Program Size: data=130.5 xdata=12412 const=663 code=9710
 creating hex file from ".\output\app"...
 User command #1: .\make.bat
-F:\comm_rec\APP>copy .\output\app.hex ..\link_hex\ 
+F:\bak\rec\APP>copy .\output\app.hex ..\link_hex\ 
 已复制         1 个文件。
 User command #2: ..\link_hex\make.bat
-F:\comm_rec\APP>cd ..\link_hex 
-F:\comm_rec\link_hex>maker -c image.cfg 
+F:\bak\rec\APP>cd ..\link_hex 
+F:\bak\rec\link_hex>maker -c image.cfg 
 suport vs 00000100 
 maker
 -c
 image.cfg
 chip type : ac309n 
 fill size  = 008000 
-enter  file = F:\comm_rec\link_hex\app.hex 
-out put file = F:\comm_rec\link_hex\myoutotp.bin.fw 
+enter  file = F:\bak\rec\link_hex\app.hex 
+out put file = F:\bak\rec\link_hex\myoutotp.bin.fw 
 vector size = 8 
  waring  : code overtop file size  0x8000 at 0x8000 
 waring  : code overtop file size  0x8000 at 0x8001 
@@ -738,15 +740,15 @@ Lowest address = 00000003
 Highest address = 00009136
 waring: 16 文件地址000003 - 008000  over ride  mem1:  000003 - 0059ff  
 Lowest address = 00000000
-Highest address = 00007E8C
-F:\comm_rec\link_hex>download.bat
-F:\comm_rec\link_hex>isd_download.exe -f myoutotp.bin.fw -toram -osc 32K 
-input file name F:\comm_rec\link_hex\myoutotp.bin.fw 
+Highest address = 00007E88
+F:\bak\rec\link_hex>download.bat
+F:\bak\rec\link_hex>isd_download.exe -f myoutotp.bin.fw -toram -osc 32K 
+input file name F:\bak\rec\link_hex\myoutotp.bin.fw 
 down load file to ram 
 yulin   device         
 ide device online 
 download file ok 
-".\output\app" - 0 Error(s), 5 Warning(s).
+".\output\app" - 0 Error(s), 7 Warning(s).
 Build target 'app'
 compiling key.c...
 linking...
@@ -755,22 +757,22 @@ linking...
     CALLER1: TIMER3ISR/KEY
     CALLER2: ?C_C51STARTUP
 *** WARNING L9: EMPTY SEGMENTS ENCOUNTERED
-Program Size: data=130.5 xdata=12412 const=663 code=9713
+Program Size: data=130.5 xdata=12412 const=663 code=9710
 creating hex file from ".\output\app"...
 User command #1: .\make.bat
-F:\comm_rec\APP>copy .\output\app.hex ..\link_hex\ 
+F:\bak\rec\APP>copy .\output\app.hex ..\link_hex\ 
 已复制         1 个文件。
 User command #2: ..\link_hex\make.bat
-F:\comm_rec\APP>cd ..\link_hex 
-F:\comm_rec\link_hex>maker -c image.cfg 
+F:\bak\rec\APP>cd ..\link_hex 
+F:\bak\rec\link_hex>maker -c image.cfg 
 suport vs 00000100 
 maker
 -c
 image.cfg
 chip type : ac309n 
 fill size  = 008000 
-enter  file = F:\comm_rec\link_hex\app.hex 
-out put file = F:\comm_rec\link_hex\myoutotp.bin.fw 
+enter  file = F:\bak\rec\link_hex\app.hex 
+out put file = F:\bak\rec\link_hex\myoutotp.bin.fw 
 vector size = 8 
  waring  : code overtop file size  0x8000 at 0x8000 
 waring  : code overtop file size  0x8000 at 0x8001 
@@ -1448,10 +1450,10 @@ Lowest address = 00000003
 Highest address = 00009136
 waring: 16 文件地址000003 - 008000  over ride  mem1:  000003 - 0059ff  
 Lowest address = 00000000
-Highest address = 00007E8C
-F:\comm_rec\link_hex>download.bat
-F:\comm_rec\link_hex>isd_download.exe -f myoutotp.bin.fw -toram -osc 32K 
-input file name F:\comm_rec\link_hex\myoutotp.bin.fw 
+Highest address = 00007E88
+F:\bak\rec\link_hex>download.bat
+F:\bak\rec\link_hex>isd_download.exe -f myoutotp.bin.fw -toram -osc 32K 
+input file name F:\bak\rec\link_hex\myoutotp.bin.fw 
 down load file to ram 
 yulin   device         
 ide device online 
@@ -1464,22 +1466,22 @@ linking...
     CALLER1: TIMER3ISR/KEY
     CALLER2: ?C_C51STARTUP
 *** WARNING L9: EMPTY SEGMENTS ENCOUNTERED
-Program Size: data=130.5 xdata=12412 const=663 code=9713
+Program Size: data=130.5 xdata=12412 const=663 code=9710
 creating hex file from ".\output\app"...
 User command #1: .\make.bat
-F:\comm_rec\APP>copy .\output\app.hex ..\link_hex\ 
+F:\bak\rec\APP>copy .\output\app.hex ..\link_hex\ 
 已复制         1 个文件。
 User command #2: ..\link_hex\make.bat
-F:\comm_rec\APP>cd ..\link_hex 
-F:\comm_rec\link_hex>maker -c image.cfg 
+F:\bak\rec\APP>cd ..\link_hex 
+F:\bak\rec\link_hex>maker -c image.cfg 
 suport vs 00000100 
 maker
 -c
 image.cfg
 chip type : ac309n 
 fill size  = 008000 
-enter  file = F:\comm_rec\link_hex\app.hex 
-out put file = F:\comm_rec\link_hex\myoutotp.bin.fw 
+enter  file = F:\bak\rec\link_hex\app.hex 
+out put file = F:\bak\rec\link_hex\myoutotp.bin.fw 
 vector size = 8 
  waring  : code overtop file size  0x8000 at 0x8000 
 waring  : code overtop file size  0x8000 at 0x8001 
@@ -2157,10 +2159,10 @@ Lowest address = 00000003
 Highest address = 00009136
 waring: 16 文件地址000003 - 008000  over ride  mem1:  000003 - 0059ff  
 Lowest address = 00000000
-Highest address = 00007E8C
-F:\comm_rec\link_hex>download.bat
-F:\comm_rec\link_hex>isd_download.exe -f myoutotp.bin.fw -toram -osc 32K 
-input file name F:\comm_rec\link_hex\myoutotp.bin.fw 
+Highest address = 00007E88
+F:\bak\rec\link_hex>download.bat
+F:\bak\rec\link_hex>isd_download.exe -f myoutotp.bin.fw -toram -osc 32K 
+input file name F:\bak\rec\link_hex\myoutotp.bin.fw 
 down load file to ram 
 yulin   device         
 ide device online 

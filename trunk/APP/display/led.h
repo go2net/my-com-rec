@@ -70,7 +70,7 @@
 #define LED0_PLAY	  BIT(LED_A)
 #define LED0_PAUSE	  BIT(LED_B)
 #define LED0_REC	  0//BIT(LED_G)
-#elif defined(K000_CHENGQIANG_REC_V003)||defined(K2069_SES_2069_REC_V001)
+#elif defined(K000_CHENGQIANG_REC_V003)||defined(K2069_SES_2069_REC_V001)||defined(K0000_BHT_C202_REC_V001)
 #define LED0_AUX	  0//BIT(LED_A)
 #define LED0_FM	      BIT(LED_F)//0//BIT(LED_B)
 #define LED0_USB	  BIT(LED_C)
