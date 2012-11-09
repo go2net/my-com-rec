@@ -561,9 +561,11 @@ void ap_handle_hotkey(u8 key)
 		encode_status = RECODE_PAUSE;
 	
 #if FM_MODULE 
+#ifndef DISP_REC_TIME_PAUSE
 		if(FM_RADIO_MODE == work_mode)
 			disp_port(MENU_FM_MAIN);
 		else
+#endif			
 #endif
 		{
 			main_menu = MENU_REC_PAUSE;	
@@ -576,9 +578,11 @@ void ap_handle_hotkey(u8 key)
 		encode_status = RECODE_WORKING;
 	
 #if FM_MODULE 
+#ifndef DISP_REC_TIME_PAUSE
 		if(FM_RADIO_MODE == work_mode)
 			disp_port(MENU_FM_MAIN);
 		else
+#endif			
 #endif
 		{
 		 	main_menu = MENU_RECWORKING;//
