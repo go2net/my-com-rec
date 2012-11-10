@@ -111,20 +111,23 @@ static void music_info_init(void)
     if ( (given_device & (~VIRTUAL_DEVICE)) == DEVICE_SDMMC0)
     {
         given_file_method = PLAY_BREAK_POINT;
-        put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
+        //put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
     }
     else if ((given_device & (~VIRTUAL_DEVICE)) == DEVICE_UDISK)
     {
         given_file_method = PLAY_BREAK_POINT;
-        put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
+        //put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
     }
 
     else
     {
         given_device = DEVICE_SDMMC0;
         given_file_method = PLAY_FIRST_FILE;
-        put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
+       // put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
     }
+
+        put_msg_lifo(MSG_MUSIC_SELECT_NEW_DEVICE);
+	
 }
 
 /*----------------------------------------------------------------------------*/
