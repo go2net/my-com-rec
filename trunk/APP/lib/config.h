@@ -63,8 +63,8 @@
 //#define K1189_AJR_LSK8_REC_V001
 //#define K0000_XFW_GL005_REC_V001
 //#define K1181_YDT_1181_REC_V001
-//#define K0000_GW_613_REC_V001
-#define K0000_BHT_C202_REC_V001
+#define K0000_GW_613_REC_V001
+//#define K0000_BHT_C202_REC_V001
 
 
 #if defined(K0000_BHT_C202_REC_V001)
@@ -107,7 +107,7 @@
 
 #define PLAY_STATUS_SPARK_WHEN_RECORDING
 #define POWER_OFF_IN_IDEL
-//#define NO_IDLE_MODE_FUNC
+
 #define DEFAULT_VOL			MAX_MAIN_VOL
 #define REPEAT_MODE_USE_ONE_ALL
 
@@ -1074,7 +1074,7 @@ enum
 
 #define    BURST_OUT_POINT_SAVE_ENABLE      0			//突然断电使能位,1有效,3.3V需要电容支持至少100μF
 #define    MUSIC_FADE_OUT_EN				1			//切换歌曲的淡出使能， 1有效
-#define    VIRTUAL_ENABLE                   1           ///<虚拟设别使能 1：enable；0：disable；
+#define    VIRTUAL_ENABLE                   0           ///<虚拟设别使能 1：enable；0：disable；
 
 //sd检测模式
 
