@@ -1092,7 +1092,7 @@ enum
 
 #define    BURST_OUT_POINT_SAVE_ENABLE      0			//突然断电使能位,1有效,3.3V需要电容支持至少100μF
 #define    MUSIC_FADE_OUT_EN				1			//切换歌曲的淡出使能， 1有效
-#define    VIRTUAL_ENABLE                   0           ///<虚拟设别使能 1：enable；0：disable；
+#define    VIRTUAL_ENABLE                   1           ///<虚拟设别使能 1：enable；0：disable；
 
 //sd检测模式
 
