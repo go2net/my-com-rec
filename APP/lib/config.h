@@ -64,8 +64,8 @@
 //#define K0000_XFW_GL005_REC_V001
 //#define K1181_YDT_1181_REC_V001
 //#define K0000_GW_613_REC_V001
-//#define K0000_BHT_C202_REC_V001
-#define K4006_SES_1234_REC_V001
+#define K0000_BHT_C202_REC_V001
+//#define K4006_SES_1234_REC_V001
 
 #if defined(K4006_SES_1234_REC_V001)
 
@@ -1094,6 +1094,10 @@ enum
 #define    MUSIC_FADE_OUT_EN				1			//切换歌曲的淡出使能， 1有效
 #define    VIRTUAL_ENABLE                   1           ///<虚拟设别使能 1：enable；0：disable；
 
+#if defined(K0000_BHT_C202_REC_V001)
+#undef VIRTUAL_ENABLE
+#define    VIRTUAL_ENABLE                   0
+#endif
 //sd检测模式
 
 #define SDMMC_CLK_MODE   1	  ///<使用SD clk 查询模式
