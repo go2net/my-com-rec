@@ -479,6 +479,8 @@ void disp_aux(void)
 #elif defined(EXTENDED_AUX_FUNC)
     printf_str("AU-",0);
     printf_num(extended_aux_sel,3,1);
+#elif defined(K0000_GW_613_REC_V001)
+    printf_str(" AU",0);	
 #else
     printf_str(" AUX",0);
 #endif
