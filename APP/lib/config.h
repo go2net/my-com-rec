@@ -143,7 +143,7 @@
 
 //#define INDEPENDENT_AUX_VOL_KEY
 //#define AMP_MODE_SELECT_PORT_USE_P04
-#define EXTENDED_AUX_FUNC
+//#define EXTENDED_AUX_FUNC
 #endif
 
 
