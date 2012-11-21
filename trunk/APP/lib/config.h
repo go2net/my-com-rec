@@ -16,6 +16,7 @@
 //#define DEFAULT_VOL		30
 //#define INDEPENDENT_REC_LED
 
+#if 1
 //#define IIC_GPIO_USE_P00_P01
 //#define IIC_GPIO_USE_P02_P03
 //#define EXCHANGE_AUX_CHANNEL
@@ -902,6 +903,15 @@
 #define POWER_OFF_IN_IDEL
 #endif
 
+
+
+
+
+
+
+
+
+#endif
 
 #ifndef _CONFIG_
 #define _CONFIG_
