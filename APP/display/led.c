@@ -321,6 +321,27 @@ void LED_SEG_OUT(u8 SEG_Data)
 	LED_SEG &=~0x7F;
        LED_SEG |=(SEG_Data&0x7F);
 }
+#elif defined(K4006_SES_1234_REC_V001)
+void LED_COM_OUT(u8 COM_Data)
+{
+ 	P31 =((COM_Data&0x01)>0)?1:0;
+ 	P32 =((COM_Data&0x02)>0)?1:0;
+ 	P33 =((COM_Data&0x04)>0)?1:0;
+ 	P34 =((COM_Data&0x08)>0)?1:0;
+ 	P30 =((COM_Data&0x10)>0)?1:0;
+}
+void LED_SEG_OUT(u8 SEG_Data)
+{
+    	LED_COM &= ~0x0f;
+	LED_SEG &=~0x7F;
+ 	P14=((SEG_Data&SEG_A)>0)?0:1;
+ 	P13=((SEG_Data&SEG_B)>0)?0:1;
+ 	P11=((SEG_Data&SEG_C)>0)?0:1;
+ 	P10=((SEG_Data&SEG_D)>0)?0:1;
+ 	P16=((SEG_Data&SEG_E)>0)?0:1;
+ 	P12=((SEG_Data&SEG_F)>0)?0:1;
+ 	P15=((SEG_Data&SEG_G)>0)?0:1;
+}
 #else
 void LED_COM_OUT(u8 COM_Data)
 {

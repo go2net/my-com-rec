@@ -216,6 +216,9 @@
 #if defined(CHARGER_DET_USE_PORT_P07)
 #define charge_port_init()		P07 =0;P0PU  &= ~(BIT(7));P0PD|= (BIT(7));P0DIR |= (BIT(7))
 #define CHARGER_DET_PORT	P07
+#elif defined(CHARGER_DET_USE_PORT_P02)
+#define charge_port_init()		P02 =0;P0PU  &= ~(BIT(2));P0PD|= (BIT(2));P0DIR |= (BIT(2))
+#define CHARGER_DET_PORT	P02
 #elif defined(CHARGER_DET_USE_PORT_P17)
 #define charge_port_init()		P17 =0;P1PU  &= ~(BIT(7));P1PD|= (BIT(7));P1DIR |= (BIT(7))
 #define CHARGER_DET_PORT	P17
