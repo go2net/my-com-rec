@@ -74,6 +74,7 @@
 
 #define IIC_GPIO_USE_P00_P01
 
+#define USE_LED_PLAY_MODE
 #define ADKEY_PORT_P06
 #define NO_PLAY_STATUS_LED
 
