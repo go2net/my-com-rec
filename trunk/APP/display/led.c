@@ -324,11 +324,11 @@ void LED_SEG_OUT(u8 SEG_Data)
 #elif defined(K4006_SES_1234_REC_V001)
 void LED_COM_OUT(u8 COM_Data)
 {
- 	P31 =((COM_Data&0x01)>0)?1:0;
- 	P32 =((COM_Data&0x02)>0)?1:0;
+ 	P30 =((COM_Data&0x01)>0)?1:0;
+ 	P31 =((COM_Data&0x02)>0)?1:0;
  	P33 =((COM_Data&0x04)>0)?1:0;
  	P34 =((COM_Data&0x08)>0)?1:0;
- 	P30 =((COM_Data&0x10)>0)?1:0;
+ 	P32 =((COM_Data&0x10)>0)?1:0;
 }
 void LED_SEG_OUT(u8 SEG_Data)
 {
