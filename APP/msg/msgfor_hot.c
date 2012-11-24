@@ -592,7 +592,9 @@ void ap_handle_hotkey(u8 key)
         continue_encode();
         break;
     case MSG_REC_PLAY:     //播放最后的录音文件
-
+    
+	if(encode_fristfile==0)break;
+	
 #ifdef REC_PLAY_BREAK_POINT
 //        if(AUX_MODE == work_mode)break;
 	if(rec_pley_bp_flag==0x00){
