@@ -852,8 +852,14 @@ void music_play(void)
 #endif
         case MSG_DEL_CURR_FILE:			 //删除当前播放文件
 #ifdef DEL_REC_FILE_ONLY		
-	   if(fs_msg.fileNumber<encode_fristfile)
-	   	break;
+
+	   //if(fs_msg.fileNumber<encode_fristfile)
+	   //	break;
+
+		if( (given_file_number < encode_fristfile) || (given_file_number > (encode_fristfile + encode_filenum - 1)) )
+		{
+			break;
+		}	   
 #endif	   		
             stop_decode();
             delete_current_file((device_active & (~VIRTUAL_DEVICE)), &fat_ptr1);

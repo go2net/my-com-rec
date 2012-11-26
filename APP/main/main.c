@@ -349,7 +349,7 @@ static void sys_info_init(void)
 
     dac_init(tmp);
     delay_10ms(50);										//µÈ´ý,¼ì²âUSB,SDÔÚÏß×´Ì¬
-    //init_rec_name();
+    init_rec_name();
     restore_music_point();
 	
 #if RTC_ENABLE
