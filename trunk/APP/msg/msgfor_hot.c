@@ -499,7 +499,7 @@ void ap_handle_hotkey(u8 key)
 #elif defined(PLAY_STATUS_SPARK_WHEN_RECORDING)
     	 flashled(LED_SPARK_FAST);	
 #endif
-       init_rec_name();
+       //init_rec_name();
         device_active |= VIRTUAL_DEVICE;
         encode_device = device_active;	 //设置录音存储设备
         write_file_info(0);
@@ -593,7 +593,7 @@ void ap_handle_hotkey(u8 key)
         break;
     case MSG_REC_PLAY:     //播放最后的录音文件
     
-	if(encode_fristfile==0)break;
+	if(((encode_filenum)==0)&&(encode_status == RECODE_STOP)&&(work_mode==MUSIC_MODE))break;
 	
 #ifdef REC_PLAY_BREAK_POINT
 //        if(AUX_MODE == work_mode)break;
