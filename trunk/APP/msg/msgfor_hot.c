@@ -378,6 +378,9 @@ void ap_handle_hotkey(u8 key)
 
         if(RECODE_PLAY >= encode_status)
         {
+	    if((get_device_online_status()&0x03)==0) {
+			break;
+		}
             put_msg_lifo(MSG_REC_FIND);
 #if defined(INDEPENDENT_REC_LED)
     	     flashled(LED_OFF);			
@@ -592,8 +595,11 @@ void ap_handle_hotkey(u8 key)
         continue_encode();
         break;
     case MSG_REC_PLAY:     //播放最后的录音文件
-    
-	if(((encode_filenum)==0)&&(encode_status == RECODE_STOP)&&(work_mode==MUSIC_MODE))break;
+
+	    if((get_device_online_status()&0x03)==0) {
+			break;
+		}	
+	if(((encode_filenum)==0)&&(encode_status == RECODE_STOP)&&(work_mode!=REC_MIC_MODE))break;
 	
 #ifdef REC_PLAY_BREAK_POINT
 //        if(AUX_MODE == work_mode)break;
