@@ -114,12 +114,14 @@ void clear_led(void)
 void led_disp_icon(u8 id)
 {
 #if defined(LED_USE_NORMAL_4X8)
+#if FM_MODULE
 	if(work_mode == FM_RADIO_MODE){
     		LED1_STATUS |= id;
 	}
 	else{
     		LED0_STATUS |= id;
 	}
+#endif	
 #else
     LED0_STATUS |= id;	
 #endif

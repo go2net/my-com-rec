@@ -305,7 +305,25 @@ void restore_music_point(void)
 #endif
     }
 }
+#ifdef MUSIC_PAUSE_SPARK_SRN
+void music_pause_hdlr()
+{
+	static bool srn_spark=0;
 
+	if(MAD_PAUSE== play_status){
+		
+		srn_spark=~srn_spark;
+
+		if(srn_spark){
+			
+	               disp_port(MENU_PAUSE);
+		}
+		else{
+	                disp_port(MENU_NULL);
+		}
+	}
+}
+#endif
 /*----------------------------------------------------------------------------*/
 /**@brief   Í£Ö¹½âÂë
    @param   ÎÞ
@@ -790,6 +808,10 @@ void music_play(void)
             break;
 
         case MSG_HALF_SECOND:
+			
+#ifdef MUSIC_PAUSE_SPARK_SRN
+	music_pause_hdlr();
+#endif
 
 #if defined(USE_BAT_MANAGEMENT)
 		bmt_hdlr();
