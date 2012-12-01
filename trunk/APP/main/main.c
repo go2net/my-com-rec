@@ -368,7 +368,9 @@ static void sys_info_init(void)
 #endif
         else
         {
+#ifdef SYS_MODE_USE_MEM_AT_POWER_ON        
             work_mode = read_info(MEM_SYSMODE);
+#endif			
             if (work_mode > MAX_WORK_MODE)
             {
                 work_mode = MUSIC_MODE;

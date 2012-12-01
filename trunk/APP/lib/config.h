@@ -118,7 +118,6 @@
 #define FM_USE_BK1080
 #define DEL_REC_FILE_ONLY
 
-#define REPEAT_MODE_USE_ONE_ALL
 
 #endif
 
