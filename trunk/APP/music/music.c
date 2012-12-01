@@ -7,6 +7,8 @@
    @note
 */
 /*----------------------------------------------------------------------------*/
+#include "config.h"
+
 #include "music.h"
 #include "msgfor_hot.h"
 #include "device.h"
@@ -692,11 +694,24 @@ void music_play(void)
 #endif				
             }
 #else
+
+#ifdef REPEAT_MODE_USE_ONE_ALL
+		  if(play_mode == REPEAT_ALL){
+		  	
+                    play_mode = REPEAT_ONE;
+		  }
+		  else {
+                    play_mode = REPEAT_ALL;
+
+		  }
+		  //break;
+#else  
                 play_mode++;
                 if (play_mode > REPEAT_RANDOM)
                 {
                     play_mode = REPEAT_ALL;
                 }
+#endif
 #endif
 
 #if defined(LED_RUN_FAST_WHEN_PLAY_MODE_AT_REP_ONE)	
