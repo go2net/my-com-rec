@@ -798,6 +798,13 @@ void keyScan(void)
 	            key = irff00_msg_fm_table[key_style][last_key];
         }
 
+#ifdef ADKEY_DETECT_FUNC
+	if((key==MSG_MIC_OUT)||(key==MSG_MIC_IN)){
+		
+		
+	}
+#endif
+
         if (key == NO_MSG)										//ÎÞÐ§
             goto _exit_keyScan;
 

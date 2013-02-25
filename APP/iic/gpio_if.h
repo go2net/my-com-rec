@@ -138,6 +138,16 @@
 #define iic_clk_out()     P0DIR &= ~(BIT(5));P0PU |= (BIT(5))
 #define iic_clk_h()        P05 = 1
 #define iic_clk_l()         P05 = 0
+#elif defined(IIC_GPIO_USE_P16_P17)
+#define iic_data_out()    P1DIR &= ~(BIT(7));P1PU |= (BIT(7))
+#define iic_data_in()      P1DIR |= (BIT(7));P1PU |= (BIT(7))
+#define iic_data_r()       P17
+#define iic_data_h()       P17 = 1
+#define iic_data_l()        P17 = 0
+
+#define iic_clk_out()     P1DIR &= ~(BIT(6));P1PU |= (BIT(6))
+#define iic_clk_h()        P16 = 1
+#define iic_clk_l()         P16 = 0
 #elif defined(IIC_GPIO_USE_P02_P03)
 #define iic_data_out()    P0DIR &= ~(1<<2);P0PU |= (1<<2)
 #define iic_data_in()     P0DIR |= (1<<2);P0PU |= (1<<2)
