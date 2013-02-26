@@ -68,9 +68,9 @@
 //#define K0000_GW_613_REC_V002
 //#define K0000_BHT_C202_REC_V001
 //#define K4006_SES_1234_REC_V001
-#define JK_PX33_REC_V001
+#define JK_PX33_3094_REC_V001
 
-#if defined(JK_PX33_REC_V001)
+#if defined(JK_PX33_3094_REC_V001)
 
 #define IIC_GPIO_USE_P16_P17
 #define MUTE_PORT_USE_DUMP
