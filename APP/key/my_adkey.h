@@ -104,7 +104,7 @@
 #define FM_ADKEY_L_UP_08		NO_MSG
 #define FM_ADKEY_L_UP_09		NO_MSG
 
-#elif defined(JK_PX33_REC_V001)
+#elif defined(JK_PX33_3094_REC_V001)
 
 #define MUSIC_ADKEY_SHORT_00		NO_MSG
 #define MUSIC_ADKEY_SHORT_01		NO_MSG
