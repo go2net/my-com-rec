@@ -179,6 +179,7 @@ static void adckey_init(void)
     P0IE = ~(BIT(6));
     P0DIR |= BIT(6);
 #elif defined(ADKEY_PORT_P02)
+    P0PU&= ~(BIT(2));
     P0PD &= ~(BIT(2));
     P0IE = ~(BIT(2));
     P0DIR |= BIT(2);
@@ -366,6 +367,7 @@ void adc_scan(void)
         ADCCON = ADC_KEY_IO6; //
         P0IE = ~(BIT(6));	 
 #elif defined(ADKEY_PORT_P02)
+    	 P0PU&= ~(BIT(2));
     	 P0PD &= ~(BIT(2));
         ADCCON = ADC_KEY_IO2; //
         P0IE = ~(BIT(2));	 
