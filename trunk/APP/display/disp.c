@@ -63,6 +63,8 @@ xd_u8 rec_led_mod=0;
 extern xd_u8 extended_aux_sel;
 #endif
 
+extern bool iic_busy;
+
 u8 _code play_mode_const [5][5] = 
 {
     {" ALL"},
@@ -978,6 +980,8 @@ void disp_dled(void)
 {
     static u8 cnt_led = 0;
 
+	if(iic_busy)return;
+	
 #if defined(INDEPENDENT_REC_LED)
 	rec_disp_dled();
 #endif
