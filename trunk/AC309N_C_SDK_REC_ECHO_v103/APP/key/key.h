@@ -84,6 +84,7 @@ enum
     MSG_CH_SAVE,
     MSG_KEY_CHANGE,
 
+    MSG_NO_DEVICE,
     MSG_MUTE,
     MSG_UNMUTE,
     MSG_MUTE_UNMUTE,
@@ -164,10 +165,13 @@ void kv_init(void);
 #endif
 
 
+#define ADC_KEY_IO7     0xFF
+#define ADC_KEY_IO6     0xFE
+#define ADC_KEY_IO5     0xFD
+#define ADC_KEY_IO4     0xFC
+#define ADC_KEY_IO3     0xFB
+#define ADC_KEY_IO2     0xFA
 
-#define ADC_KEY_IO7    0xff
-#define ADC_KEY_IO6    0xfe
-#define ADC_KEY_IO5    0xfd
 #define ADC_VDD_12     0xf8
 #define ADC_LDOIN      0xf9
 #define ADC_MAX_USED   0x03

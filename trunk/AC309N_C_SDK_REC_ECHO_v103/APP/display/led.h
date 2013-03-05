@@ -14,8 +14,8 @@
 #include "config.h"
 
 #ifdef __C51__
-//#define led_com_out() P3DIR &= ~0x1F; P3HD = 0x1f,P3PD |= 0x1f; PWM4CON = 0xdf
-//#define led_seg_out() P1DIR &= ~0x7F
+#define led_com_out() P3DIR &= ~0x1F; P3HD = 0x1f,P3PD |= 0x1f; PWM4CON = 0xdf
+#define led_seg_out() P1DIR &= ~0x7F
 
 #define  LED_BIT(n)         		P1DIR |= BIT(n);P1PU&=~(BIT(n));P1PDA&=~(BIT(n));P1PDB&=~(BIT(n));
 #define  LED_ALL_INIT()          LED_BIT(0); LED_BIT(1); LED_BIT(2); LED_BIT(3); LED_BIT(4); LED_BIT(5); LED_BIT(6);

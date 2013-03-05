@@ -29,6 +29,11 @@ typedef signed int		s16, int16;
 typedef unsigned long	u32, uint32;
 typedef signed long		s32, int32;
 
+typedef xdata unsigned char 	xd_u8, xd_uint8;
+typedef xdata unsigned int		xd_u16, xd_uint16;
+typedef xdata signed long		xd_u32, xd_uint32;
+
+
 #define bool		bit
 #define _xdata		xdata
 #define _data		data

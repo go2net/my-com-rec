@@ -26,6 +26,7 @@ extern u16 given_file_number;
 
 extern u8 eq_mode;
 extern u8 play_mode;
+extern bool iic_busy,vol_change_en; ///<iic繁忙标记
 
 extern bool pc_connect, udisk_connect, sdmmc_connect;
 extern u8 _xdata win_buffer[];
@@ -163,7 +164,7 @@ void timer0isr(void)
     DPCON = 0x0;
     T0CON &= ~BIT(7);			//clear pending
 
-    disp_scan();
+    //disp_scan();
     adc_scan();
     counter0++;
     usb_polling();
@@ -179,7 +180,7 @@ void timer0isr(void)
         sdmmc_detect();
 #endif
         keyScan();
-		disp_dled();
+	 disp_dled();
     }
 
 //    if ((counter0 % 50) == 0)
@@ -189,8 +190,8 @@ void timer0isr(void)
     if ((counter0 % 100) == 0)
     {
 
-	 aux_check();
-        put_msg_fifo(MSG_200MS);
+	 //aux_check();
+        //put_msg_fifo(MSG_200MS);
         counter0 = 0;
     }
     counter1++;
@@ -224,7 +225,7 @@ static void sys_info_init(void)
 
     if ((tmp > MAX_MAIN_VOL) || (tmp == 0))              //每次开机时，不要超过最大音量的一半，以免开机音量过大
     {
-        tmp = MAX_MAIN_VOL / 2;
+        tmp = 25;
 
     }
     dac_init(tmp);
@@ -322,7 +323,7 @@ void sys_init(void)
     set_vol_tab_ptr(analog_vol_tab, digital_vol_tab);
                                     
 #if (NO_DISP != monitor)
-   // init_display();
+    //init_display();
 #endif
     sd_speed_init(0,100);
 
@@ -376,10 +377,71 @@ void sys_init(void)
     get_echo_var_ptr(0);///<传参0，不适用混响功能
 #endif
     interrupt_init(15, rtcisr);
+#ifndef NO_IR_REMOTE	
     interrupt_init(3, timer3isr);
+#endif
     interrupt_init(0, timer0isr);
     enable_interrupt();
 }
+#ifndef NO_IDLE_MODE_FUNC
+void idle_mode(void)
+{
+    u8 key;
+    input_number_en = 0;
+    vol_change_en=0;
+
+
+ disp_port(MENU_NODEVICE);			
+
+   while (1)
+    {
+        key = app_get_msg();
+
+        switch (key)
+        {
+        case MSG_NO_DEVICE:
+	    clear_all_event();
+	    flush_low_msg();
+	    disp_port(MENU_NODEVICE);			
+		break;
+
+        case MSG_MUSIC_NEW_DEVICE_IN:							//有新设备接入	
+        case MSG_CHANGE_WORK_MODE:
+            work_mode = MUSIC_MODE;
+            return;
+
+        case MSG_HALF_SECOND:
+////////////////////////////////////////////////////////////
+//显示界面的切换
+#if 0            
+            set_brightness_fade_out();
+            if (main_menu_conter < SUB_MENU_TIME)
+            {
+                main_menu_conter++;
+            }
+            else if (cur_menu != main_menu)
+            {
+                cur_menu = main_menu;
+                disp_port(cur_menu);
+            }
+#endif
+
+            break;
+#if RTC_ENABLE
+        case MSG_ALM_ON:
+            write_next_alm_sec();
+            work_mode = RTC_MODE;
+            put_msg_lifo(MSG_CHANGE_WORK_MODE);
+            break;
+#endif
+        default:
+            ap_handle_hotkey(key);        
+            break;
+        }
+    }
+
+}
+#endif
 	
 void main(void)
 {
@@ -388,7 +450,7 @@ void main(void)
     clock_in = T0CNT;									//输入时钟,define in clock.h
   //  WDT_EN();
     sys_init();
-    power_key_hdlr(SYS_PWR_ON);
+    //power_key_hdlr(SYS_PWR_ON);
     flashled(LED_ON);
 
     AMUX_P2IE_SET(AMUX0_IE&AMUX1_IE);
@@ -416,9 +478,12 @@ void main(void)
             break;
 #endif
 
+#ifndef NOT_USE_LINE_IN_FUNC
         case AUX_MODE:
             aux_fun();
             break;
+#endif
+
 
 #if RTC_ENABLE
         case RTC_MODE:
@@ -428,8 +493,12 @@ void main(void)
         case REC_MIC_MODE:
             rec_mic_fun();
             break;			
+		
         case IDLE_MODE:
-	     power_key_hdlr(SYS_PWR_OFF);
+#ifndef NO_IDLE_MODE_FUNC				
+            idle_mode();			
+#endif
+	    // power_key_hdlr(SYS_PWR_OFF);
             break;			
 
 	     default:

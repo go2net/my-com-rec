@@ -17,7 +17,17 @@
 
 #ifdef __C51__
 
+#if 1
+#define iic_data_out()    P1DIR &= ~(BIT(7));P1PU |= (BIT(7))
+#define iic_data_in()      P1DIR |= (BIT(7));P1PU |= (BIT(7))
+#define iic_data_r()       P17
+#define iic_data_h()       P17 = 1
+#define iic_data_l()        P17 = 0
 
+#define iic_clk_out()     P1DIR &= ~(BIT(6));P1PU |= (BIT(6))
+#define iic_clk_h()        P16 = 1
+#define iic_clk_l()         P16 = 0
+#else
 #define iic_data_out()    P0DIR &= ~(BIT(1));P0PU |= BIT(1) 	
 #define iic_data_in()     P0DIR |= (BIT(1));P0PU |= BIT(1)	
 #define iic_data_r()      P01
@@ -27,6 +37,7 @@
 #define iic_clk_out()    P0DIR &= ~(BIT(0));P0PU |= (BIT(0))
 #define iic_clk_h()      P00 = 1
 #define iic_clk_l()      P00 = 0
+#endif
 #if 0
 /*
 #define iic_data_out()   P02=0;P0PU |= (1<<2)

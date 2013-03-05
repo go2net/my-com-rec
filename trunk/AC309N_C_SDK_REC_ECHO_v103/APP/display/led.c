@@ -14,6 +14,7 @@
 #define LED0_STATUS          LED_BUFF[4]
 #define LED0_FLASH_STATUS    LED_FLASH[4]
 
+extern bool iic_busy;
 
 
 _idata u8 LED_BUFF[5];   ///<LEDÏÔ´æ
@@ -131,8 +132,8 @@ void init_led_disp(void)
 {
 
     clear_led();
-    //led_com_out();
-   // led_seg_out();
+    led_com_out();
+    led_seg_out();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -144,7 +145,6 @@ void init_led_disp(void)
 /*----------------------------------------------------------------------------*/
 void led_set_brightness(u8 br)
 {
-return ;
     if (br > 16)
         return;
     if (br == 16)
@@ -208,6 +208,7 @@ void disp_scan(void)
 
     u8 com, seg;
 
+    if(iic_busy)return;
 
     counter++;
     if (counter == 250)
@@ -226,7 +227,7 @@ void disp_scan(void)
     }
     com = BIT(cnt); 
     /**/
-#if 1
+#if 0
 //LED_BUFF[4]=BIT(6);
 //led_disp_icon(BIT(0));
 	Bat_icon_chk();
