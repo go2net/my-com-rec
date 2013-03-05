@@ -14,6 +14,15 @@
 #include "entry.h"
 #include "clock.h"
 
+#define JK_PX33_3094_REC_V001
+
+#define DEL_REC_FILE_ONLY
+#define REC_PLAY_BREAK_POINT
+//#define NO_IR_REMOTE
+#define NO_LED_DISPLAY
+#define INDEPENDENT_FM_OSC
+#define OSC_USE_12M
+#define NOT_USE_LINE_IN_FUNC
 
 #define USB_DEVICE_ENABLE		0		///根据客户选用的bsp库，对应地选择是否打开
 #define RTC_ENABLE              0       ///<RTC使能，如果不需要使用RTC功能，此处填0
@@ -48,7 +57,7 @@ typedef enum
 #define CL6017G      0
 #define BK1080       1
 #define KT0830EG     0
-#define QN8035       0
+#define QN8035       1
 
 
 #if ((1 == RDA5807)||(1 == CL6017G)||(1 == BK1080)||(1 == KT0830EG)||(1 == QN8035))		///<是否有fm模块
@@ -98,7 +107,11 @@ enum
 #endif
                                //(PLL_IN_OSC0_32K | PLL_IN_OSC0_4M | PLL_IN_OSC0_12M | PLL_IN_OSC1_4M | PLL_IN_OSC1_12M | PLL_IN_HPRC)//
 //输入时钟选择，具体请见clock.h                                         
+#if defined(OSC_USE_12M)
+#define INPUT_OSC_SELECT                PLL_IN_OSC1_12M// PLL_IN_HPRC//
+#else
 #define INPUT_OSC_SELECT                PLL_IN_OSC0_32K // PLL_IN_HPRC//
+#endif
 #define SHARE_32768_PERIPHERALS    0					///<是否与外设共用32768晶体，0：不共用，1：共用晶体（如收音等）
 
 

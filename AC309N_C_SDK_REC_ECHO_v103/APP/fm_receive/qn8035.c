@@ -19,7 +19,7 @@
 #define INVERSE_IMR						1
 
 //if using san noise floor as CCA algorithm,macro SCAN_NOISE_FLOOR_CCA will be set to 1 
-#define SCAN_NOISE_FLOOR_CCA 	1
+#define SCAN_NOISE_FLOOR_CCA 	0
 //if using pilot as CCA algorithm,macro PILOT_CCA will be set to 1 
 #define PILOT_CCA							0
 
@@ -238,11 +238,11 @@ void init_QN8035(void)
 	/*********User sets chip working clock **********/
 	//Following is where change the input clock wave type,as sine-wave or square-wave.
 	//default set is 32.768KHZ square-wave input.
-	//QND_WriteReg(0x01,QND_SINE_WAVE_CLOCK);
+	QND_WriteReg(0x01,QND_SINE_WAVE_CLOCK);
 	//Following is where change the input clock frequency.
-	//QND_WriteReg(XTAL_DIV0, QND_XTAL_DIV0);
-	//QND_WriteReg(XTAL_DIV1, QND_XTAL_DIV1);
-	//QND_WriteReg(XTAL_DIV2, QND_XTAL_DIV2);
+	QND_WriteReg(XTAL_DIV0, QND_XTAL_DIV0);
+	QND_WriteReg(XTAL_DIV1, QND_XTAL_DIV1);
+	QND_WriteReg(XTAL_DIV2, QND_XTAL_DIV2);
 	/********User sets chip working clock end ********/
 
 	QND_WriteReg(0x54, 0x47);//mod PLL setting
@@ -448,12 +448,14 @@ void QND_SetVol(u8 vol)
 	QND_WriteReg(VOL_CTL,regVal);
 }
 
-
+//extern void printf_u16(u16 dat,u8 c);
 bool QN8035_Read_ID(void)
 {
 	u8  xdata cChipID;
 	cChipID = QND_ReadReg(CID2);
     cChipID &= 0xfc;
+
+    //printf_u16(cChipID,'Q');
 
     if (0x84 == cChipID )
 	    return 1;

@@ -383,7 +383,7 @@ void fm_rev( void )
 #if ECHO_ENABLE
         dac_out_select(DAC_AMUX1 | ADD_DEC, 0);  
 #else
-        dac_out_select(DAC_AMUX1, 0);  
+        dac_out_select(DAC_AMUX0, 0);  
 #endif
         key = app_get_msg();
 
@@ -579,16 +579,25 @@ void fm_radio(void)
 {
 //    printf("enter fm\n");
     one_wire_ctrl_if(1);
+#ifndef INDEPENDENT_FM_OSC
     P05_source_select(P05_SEL_OSC1);
+#endif
     amux_dsp_eq();
 
     sys_clk_div(2);//SYSTEM_CLK_DIV2();
-    if (init_fm_rev())
+    if(1)
+    //if (init_fm_rev())
     {
     }
     else					// no fm module
     {
+#ifdef NO_FM_CHIP_GOTO_MP3
+        work_mode = IDLE_MODE;
+#elif defined(NOT_USE_LINE_IN_FUNC)
+        work_mode = IDLE_MODE;
+#else
         work_mode++;
+#endif
         return;
     }
 

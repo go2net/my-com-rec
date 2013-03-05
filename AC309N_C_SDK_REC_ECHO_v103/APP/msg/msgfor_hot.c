@@ -38,6 +38,10 @@ extern u8 music_type;
 bool rec_device_out;
 u8 key_100_flag=0;
 
+#ifdef REC_PLAY_BREAK_POINT
+xd_u8 rec_pley_bp_flag=0;
+xd_u16 last_play_index=0;
+#endif
 
 
 /*----------------------------------------------------------------------------*/
@@ -139,6 +143,9 @@ void ap_handle_hotkey(u8 key)
         break;
 #endif
 
+
+#ifndef NOT_USE_LINE_IN_FUNC
+
     case MSG_AUX_IN :
         break_encode();
         set_brightness_all_on();
@@ -170,6 +177,7 @@ void ap_handle_hotkey(u8 key)
 	 put_msg_lifo(MSG_MUSIC_NEW_DEVICE_IN);
 		
         break;
+#endif
 
     case MSG_SDMMC_IN :
         set_brightness_all_on();
@@ -335,15 +343,24 @@ void ap_handle_hotkey(u8 key)
     case MSG_REC_KEY:	  //录音开始和结束
         if(RECODE_PLAY >= encode_status)
         {
-            put_msg_lifo(MSG_REC_FIND);
+
+	    if((get_device_online_status()&0x03)==0) {
+			break;
+	     }		
+
+	     put_msg_lifo(MSG_REC_FIND);
     	    //if(BUSY == echo_ptr->status)
             {
     		    //close_echo();
             }
+
+    	     flashled(LED_FAST);			
+			
         }
         else
         {
             put_msg_lifo(MSG_REC_STOP);
+    	     flashled(LED_ON);						
         }
         break;
 
@@ -362,6 +379,8 @@ void ap_handle_hotkey(u8 key)
 
     case MSG_ENCODE_END:   //设备写err  或 设备满
 	//	deg_str("MSG_ENCODE_END \n");
+    	     flashled(LED_ON);						
+
 		if(rec_device_out)		//录音时活动设备拔出,在设备拔出那里处理，在此不做处理
 		{
 			rec_device_out =0;
@@ -380,11 +399,12 @@ void ap_handle_hotkey(u8 key)
              put_msg_lifo(MSG_MUSIC_NEW_DEVICE_IN);
              break;   
         }
-       // break_encode();
+#ifndef NOT_USE_LINE_IN_FUNC		
         if(AUX_MODE == work_mode)
         {
             main_menu = MENU_AUX;
         }
+#endif		
 #if FM_MODULE 
 		else if(FM_RADIO_MODE == work_mode)
         {
@@ -438,6 +458,7 @@ void ap_handle_hotkey(u8 key)
 
 		rec_device_out = 0;
 
+    	     flashled(LED_FAST);			
 
 #if 0
 		 rec_sys_set(0);  //0:24M   1:48M
@@ -551,6 +572,12 @@ void ap_handle_hotkey(u8 key)
         //disp_port(MENU_REC);
         break;
     case MSG_REC_STOP:      //停止录音
+
+#ifdef REC_PLAY_BREAK_POINT
+	rec_pley_bp_flag=0;
+#endif
+      	 flashled(LED_ON);						
+
         api_stop_encode();		//停止录音
         put_msg_lifo(MSG_REC_PLAY);
         break;
@@ -585,6 +612,42 @@ void ap_handle_hotkey(u8 key)
         continue_encode();
         break;
     case MSG_REC_PLAY:     //播放最后的录音文件
+
+
+#ifdef REC_PLAY_BREAK_POINT
+	if(((encode_filenum)==0)&&(encode_status == RECODE_STOP)&&(work_mode!=REC_MIC_MODE))break;
+
+//        if(AUX_MODE == work_mode)break;
+	if(rec_pley_bp_flag==0x00){
+
+		rec_pley_bp_flag =0x01;
+	       // device_active |=VIRTUAL_DEVICE;
+
+		//if(device_active&VIRTUAL_DEVICE){
+		//	rec_pley_bp_flag =0x81;
+		//}
+
+		last_play_index =  given_file_number;
+	}
+	else if(rec_pley_bp_flag ==0x01){
+		
+		//if(rec_pley_bp_flag&0x80>0){			
+	       //       device_active |=VIRTUAL_DEVICE;
+		//}
+		//else{
+	              device_active &=~VIRTUAL_DEVICE;
+		//}
+
+		rec_pley_bp_flag =0x00;
+		
+		given_file_number=last_play_index;
+              put_msg_lifo(MSG_MUSIC_PLAY_NEW_FILE);
+		break;
+	}
+	else if(rec_pley_bp_flag ==0xFF){
+		rec_pley_bp_flag =0;
+	}
+#endif
 
         encode_status = RECODE_PLAY;
         given_device = encode_device & (~VIRTUAL_DEVICE);

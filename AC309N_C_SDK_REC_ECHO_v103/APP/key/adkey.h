@@ -32,38 +32,38 @@ u16 _code adkey1_check_table[] = {ADKEY1_0, ADKEY1_1, ADKEY1_2, ADKEY1_3, ADKEY1
 #define ADKEY1_MUSIC_SHORT		\
                                 				/*00*/    NO_MSG,\
 							    	/*01*/    NO_MSG,\
-								/*02*/    NO_MSG,\
-								/*03*/    MSG_MUSIC_PP,\
-								/*04*/    NO_MSG,\
-								/*05*/    NO_MSG,\
-								/*06*/    MSG_NEXT_WORKMODE,\
-								/*07*/    MSG_MUSIC_NEXT_FILE,\
-								/*08*/    MSG_MUSIC_PREV_FILE,\
-								/*09*/    MSG_REC_KEY,
+								/*02*/    MSG_VOL_UP,\
+								/*03*/    MSG_VOL_DOWN,\
+								/*04*/    MSG_REC_KEY,\
+								/*05*/    MSG_REC_PLAY,\
+								/*06*/    MSG_MUSIC_PP,\
+								/*07*/    MSG_MUSIC_PREV_FILE,\
+								/*08*/    MSG_MUSIC_NEXT_FILE,\
+								/*09*/    MSG_NEXT_WORKMODE,
 
 #define ADKEY1_MUSIC_LONG		\
                                 /*00*/    NO_MSG,\
                                 /*01*/    NO_MSG,\
 								/*02*/    NO_MSG,\
-								/*03*/    MSG_POWER_ON,\
-								/*04*/    NO_MSG,\
+								/*03*/    NO_MSG,\
+								/*04*/    MSG_DEL_CURR_FILE,\
 								/*05*/    NO_MSG,\
 								/*06*/    NO_MSG,\
-								/*07*/    MSG_VOL_UP,\
-								/*08*/    MSG_VOL_DOWN,\
+								/*07*/    NO_MSG,\
+								/*08*/    NO_MSG,\
 								/*09*/    NO_MSG,
 
 
 #define ADKEY1_MUSIC_HOLD		\
                                 /*00*/    NO_MSG,\
                                 /*01*/    NO_MSG,\
-								/*02*/    NO_MSG,\
-								/*03*/    MSG_POWER_KEY_HOLD,\
+								/*02*/    MSG_VOL_UP,\
+								/*03*/    MSG_VOL_DOWN,\
 								/*04*/    NO_MSG,\
 								/*05*/    NO_MSG,\
 								/*06*/    NO_MSG,\
-								/*07*/    MSG_VOL_UP,\
-								/*08*/    MSG_VOL_DOWN,\
+								/*07*/    MSG_VOL_DOWN,\
+								/*08*/    MSG_VOL_UP,\
 								/*09*/    NO_MSG,
 
 #define ADKEY1_MUSIC_LONG_UP	\
@@ -90,37 +90,37 @@ const u8 _code adkey1_msg_music_table[4][10] =				//Music模式下的遥控转换表
 #define ADKEY1_FM_SHORT			\
 								/*00*/    NO_MSG,\	
 							    	/*01*/    NO_MSG,\  
-								/*02*/    NO_MSG,\
-								/*03*/    MSG_FM_SCAN_ALL,\
+								/*02*/    MSG_VOL_UP,\
+								/*03*/    MSG_VOL_DOWN,\
 								/*04*/    NO_MSG,\
 								/*05*/    NO_MSG,\
-								/*06*/    MSG_NEXT_WORKMODE,\
-								/*07*/    MSG_FM_NEXT_STATION,\
-								/*08*/    MSG_FM_PREV_STATION,\
-								/*09*/    MSG_REC_KEY,
+								/*06*/    MSG_FM_SCAN_ALL,\
+								/*07*/    MSG_FM_PREV_STATION,\
+								/*08*/    MSG_FM_NEXT_STATION,\
+								/*09*/    MSG_NEXT_WORKMODE,
 
 #define ADKEY1_FM_LONG			\
 								/*00*/    NO_MSG,\
                                 				/*01*/    NO_MSG,\
 								/*02*/    NO_MSG,\
-								/*03*/    MSG_POWER_ON,\
+								/*03*/    NO_MSG,\
 								/*04*/    NO_MSG,\
 								/*05*/    NO_MSG,\
 								/*06*/    NO_MSG,\
-								/*07*/    MSG_VOL_UP,\
-								/*08*/    MSG_VOL_DOWN,\
+								/*07*/    NO_MSG,\
+								/*08*/    NO_MSG,\
 								/*09*/    NO_MSG,
 
 #define ADKEY1_FM_HOLD			\
 								/*00*/    NO_MSG,\
                                				 /*01*/    NO_MSG,\
-								/*02*/    NO_MSG,\
-								/*03*/    MSG_POWER_KEY_HOLD,\
+								/*02*/    MSG_VOL_UP,\
+								/*03*/    MSG_VOL_DOWN,\
 								/*04*/    NO_MSG,\
 								/*05*/    NO_MSG,\
 								/*06*/    NO_MSG,\
-								/*07*/    MSG_VOL_UP,\
-								/*08*/    MSG_VOL_DOWN,\
+								/*07*/    MSG_VOL_DOWN,\
+								/*08*/    MSG_VOL_UP,\
 								/*09*/    NO_MSG,
 
 

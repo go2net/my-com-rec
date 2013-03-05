@@ -93,12 +93,12 @@ _code u8 analog_vol_tab[] =
    @note     void amp_mute(bool mute)
 */
 /*----------------------------------------------------------------------------*/
-#define AMP_MUTE_PORT_INIT() 	 P0DIR &= ~BIT(3);P0PU &= ~BIT(3);P0PD &= ~BIT(3)
-#define AMP_MUTE_DISABLE() 	 P03 = 0
-#define AMP_MUTE_ENABLE() 	 P03 = 1
+#define AMP_MUTE_PORT_INIT() 	// P0DIR &= ~BIT(3);P0PU &= ~BIT(3);P0PD &= ~BIT(3)
+#define AMP_MUTE_DISABLE()	 	// P03 = 0
+#define AMP_MUTE_ENABLE() 	 	//P03 = 1
 
-#define ONE_WIRE_CTRL_PORT_HIGH()		P03  =1
-#define ONE_WIRE_CTRL_PORT_LOW()		P03  =0
+#define ONE_WIRE_CTRL_PORT_HIGH()		//P03  =1
+#define ONE_WIRE_CTRL_PORT_LOW()		//P03  =0
 
 void one_wire_delay(u16 d_t)
 {

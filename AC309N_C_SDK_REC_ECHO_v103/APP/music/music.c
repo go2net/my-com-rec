@@ -72,6 +72,10 @@ extern u16 _idata user_code;
 extern u8 _pdata music_spec[9];
 extern u8 _bdata device_online;
  bool kalaok_button;
+ 
+#ifdef REC_PLAY_BREAK_POINT
+extern  xd_u8 rec_pley_bp_flag;
+#endif
 
 /** 存放ID3V2信息的结构体变量 */
 ID3V2_PARSE _xdata s_id3v2; 
@@ -510,7 +514,10 @@ void music_play(void)
 
 
         case MSG_MUSIC_SELECT_NEW_FILE:
-
+			
+#ifdef REC_PLAY_BREAK_POINT
+	   rec_pley_bp_flag=0;
+#endif
             if (device_check() == 0)                                //当前播放设备已经不在线,则自动选取下一个设备
             {
                 given_device = DEVICE_AUTO_NEXT;
@@ -840,6 +847,14 @@ void music_play(void)
             break;
 #endif
         case MSG_DEL_CURR_FILE:			 //删除当前播放文件
+
+#ifdef DEL_REC_FILE_ONLY		
+		if( (given_file_number < encode_fristfile) || (given_file_number > (encode_fristfile + encode_filenum - 1)) )
+		{
+			break;
+		}	   
+#endif	   		
+        
             stop_decode();
             delete_current_file((device_active & (~VIRTUAL_DEVICE)), &fat_ptr1);
             given_device = device_active;

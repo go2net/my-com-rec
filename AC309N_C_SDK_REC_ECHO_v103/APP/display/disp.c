@@ -54,6 +54,7 @@ extern bool flash_en;			///<显示闪动允许
 extern u8 bright_counter;		///<显示亮度调整延时
 extern u8 play_status;	
 
+extern bool iic_busy;
 
 
 u8 _code play_mode_const [5][5] = 
@@ -495,6 +496,10 @@ void disp_nothing(void)
     clear_led();
 }
 
+void disp_no_device(void)
+{
+    printf_str(" NO",0);//my_printf("OFF ");
+}
 #if RTC_ENABLE
 
 extern RTC_TIME _xdata curr_time;
@@ -741,7 +746,11 @@ void disp_port(u8 menu)
         case MENU_POWER_UP:
             disp_power_on();
             break;
-
+			
+        case MENU_NODEVICE:
+            disp_no_device();
+            break;
+			
         case MENU_FM_DISP_FRE:
             #if FM_MODULE
             disp_fm_freq();
@@ -850,6 +859,10 @@ void disp_port(u8 menu)
 
 
 u8 led_flag;
+#define led_gpio_init()			P1DIR &= ~(BIT(6));P1PU |= (BIT(6))
+#define LED_GPIO_CTRL_OFF()		P16 = 0
+#define LED_GPIO_CTRL_ON()		P16 = 1
+
 /*----------------------------------------------------------------------------*/
 /**@brief  点LED程序
    @param  1:开下拉	 0：开上拉
@@ -859,23 +872,14 @@ u8 led_flag;
 /*----------------------------------------------------------------------------*/
 void dled_ctl(u8 flag)
 {
-
-	P0DIR &= ~(BIT(7));
-	P0PU|=(BIT(7));
-
-	if(flag)
+	led_gpio_init();
+	if(flag>0)
 	{
-		P07= 1;
-	    //P5PU |= BIT(7);///500om POWER DOWN ENABLE
-		//P5PU &=	~BIT(6);///10k POWER UP DISABLE
+		LED_GPIO_CTRL_ON();
 	}
 	else
 	{
-
-		P07= 0;
-
-	   //P5PU &= ~BIT(7);///500om POWER DOWN DISABLE
-	//	P5PU |=	BIT(6);///10k POWER UP ENABLE
+		LED_GPIO_CTRL_OFF();
 	}
 }
 
@@ -900,7 +904,9 @@ void flashled(u8 fre)
 /*----------------------------------------------------------------------------*/
 void disp_dled(void)
 {
-    static u8 cnt_led = 0;
+       static u8 cnt_led = 0;
+
+	if(iic_busy)return;
 
 	if(0 == led_flag)
 	{

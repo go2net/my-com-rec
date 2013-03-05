@@ -119,11 +119,11 @@ void alarm_tone(void)
 /*----------------------------------------------------------------------------*/
 void set_key_tone(void)
 {
-    if (!key_voice_en)
+   // if (!key_voice_en)
     {
-        return ;
+    //    return ;
     }
-    fun_send_kv();
+   // fun_send_kv();
 }
 /*----------------------------------------------------------------------------*/
 /**@brief  获取消息池的消息,事件最终转化为消息
@@ -165,9 +165,16 @@ u8 app_get_msg(void)
 /*----------------------------------------------------------------------------*/
 static void adckey_init(void)
 {
+#if 1
+    P0PU&= ~(BIT(2));
+    P0PD &= ~(BIT(2));
+    P0IE = ~(BIT(2));
+    P0DIR |= BIT(2);
+#else
     P0PD &= ~BIT(6);
     P0IE = ~BIT(6);
     P0DIR |= BIT(6);
+#endif	
     ADCCON = ADC_VDD_12;
 //	ADCCON = 0xff;					//select P07 for ADC key
 
@@ -326,8 +333,15 @@ void adc_scan(void)
     {
         adc_vddio = ADCDATH;//
         //adc_vddiol = ADCDATL;//
+#if 1
+	P0PU&= ~(BIT(2));
+    	 P0PD &= ~(BIT(2));
+        ADCCON = ADC_KEY_IO2; //
+        P0IE = ~(BIT(2));	 
+#else		
         ADCCON = ADC_KEY_IO6; //
         P0IE = ~(BIT(6));
+#endif		
     }
     else if (cnt == 2)
     {
@@ -646,6 +660,14 @@ __POWER_OFF:
 #if 1
 void timer3isr(void)
 {
+#ifdef NO_IR_REMOTE	
+    PSW = 0x08;
+    DPCON = 0;
+    if (T3CON & BIT(6))
+    {
+        T3CON &= ~(BIT(6));
+    }
+#else
     u8 counter;
     u16 ircnt;
 
@@ -700,5 +722,6 @@ _exit_timer2:
     {
         user_code = irda_data;
     }
+#endif	
 }
 #endif
