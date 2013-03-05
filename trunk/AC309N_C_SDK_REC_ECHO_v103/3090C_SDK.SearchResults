@@ -1,0 +1,6 @@
+---- MSG_REC_KEY Matches (5 in 4 files) ----
+Adkey.h (app\key):								/*09*/    MSG_REC_KEY,
+Adkey.h (app\key):								/*09*/    MSG_REC_KEY,
+Irff00.h (app\key):                                                        /*10*/    MSG_REC_KEY,\
+Key.h (app\key):    MSG_REC_KEY,
+Msgfor_hot.c (app\msg):    case MSG_REC_KEY:	  //录音开始和结束
