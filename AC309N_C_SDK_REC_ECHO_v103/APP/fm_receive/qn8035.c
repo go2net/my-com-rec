@@ -21,7 +21,7 @@
 //if using san noise floor as CCA algorithm,macro SCAN_NOISE_FLOOR_CCA will be set to 1 
 #define SCAN_NOISE_FLOOR_CCA 	0
 //if using pilot as CCA algorithm,macro PILOT_CCA will be set to 1 
-#define PILOT_CCA							0
+//#define PILOT_CCA							0
 
 
 //≥§ÃÏœﬂ≈‰÷√:	
@@ -397,7 +397,7 @@ bool QND_RXValidCH(UINT16 freq)
 		regValue = QND_ReadReg(SYSTEM1);        
 		//if it seeks a potential channel, the loop will be quited     
 		if((regValue & CHSC) == 0) break;
-		delay_10ms(1);   //delay 5ms
+		delay_10ms(2);   //delay 5ms
 		//if it was time out,chip would not normally work.
 		if((timeOut--) == 0) return 0;
 	}   

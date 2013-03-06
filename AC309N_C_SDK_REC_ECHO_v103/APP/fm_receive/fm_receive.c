@@ -36,6 +36,9 @@ extern  bool vol_change_en;
 extern u8 eq_mode;
 extern u8 _xdata decode_buffer[];
 
+#ifdef QN8035
+extern void QND_TuneToCH(UINT16 ch);
+#endif
 
 /*----------------------------------------------------------------------------*/
 /**@brief 获取全部记录的频道
@@ -375,6 +378,10 @@ _fm_scan_ret:
 void fm_rev( void )
 {
     u8 key;
+	
+#ifdef QN8035
+    QND_TuneToCH(frequency*10);
+#endif
 
     amp_mute(0);
 
@@ -585,8 +592,8 @@ void fm_radio(void)
     amux_dsp_eq();
 
     sys_clk_div(2);//SYSTEM_CLK_DIV2();
-    if(1)
-    //if (init_fm_rev())
+
+    if(init_fm_rev())
     {
     }
     else					// no fm module

@@ -164,10 +164,14 @@ void timer0isr(void)
     DPCON = 0x0;
     T0CON &= ~BIT(7);			//clear pending
 
-    //disp_scan();
+#ifndef NO_LED_DISPLAY
+    disp_scan();
+#endif    
     adc_scan();
     counter0++;
     usb_polling();
+
+   disp_dled();
 
     if ((counter0 % 5) == 0)			//10ms
     {
@@ -180,7 +184,6 @@ void timer0isr(void)
         sdmmc_detect();
 #endif
         keyScan();
-	 disp_dled();
     }
 
 //    if ((counter0 % 50) == 0)
@@ -322,8 +325,8 @@ void sys_init(void)
     sys_clk_div(4);//SYSTEM_CLK_DIV4();
     set_vol_tab_ptr(analog_vol_tab, digital_vol_tab);
                                     
-#if (NO_DISP != monitor)
-    //init_display();
+#ifndef NO_LED_DISPLAY
+    init_display();
 #endif
     sd_speed_init(0,100);
 

@@ -248,6 +248,7 @@ void ap_handle_hotkey(u8 key)
 	if(work_mode > MAX_WORK_MODE){
 		
             work_mode = MUSIC_MODE;
+		device_check();
 
 		if(get_device_online_status()&DEVICE_UDISK){
 			
