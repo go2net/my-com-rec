@@ -849,9 +849,9 @@ void music_play(void)
         case MSG_DEL_CURR_FILE:			 //删除当前播放文件
 
 #ifdef DEL_REC_FILE_ONLY		
-		if( (given_file_number < encode_fristfile) || (given_file_number > (encode_fristfile + encode_filenum - 1)) )
+		//if( (given_file_number < encode_fristfile) || (given_file_number > (encode_fristfile + encode_filenum - 1)) )
 		{
-			break;
+			//break;
 		}	   
 #endif	   		
         

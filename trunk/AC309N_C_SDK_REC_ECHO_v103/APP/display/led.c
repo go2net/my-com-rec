@@ -343,6 +343,16 @@ P1HD&=~0x7F;
 
     seg = LED_BUFF[cnt];
 
+#if 1
+    LED_COM |= 0x1f;
+    LED_COM_MASK &= ~0x1f;
+    LED_SEG &=~0x7f;			 //ÇåLED COM SEG	
+
+    LED_SEG |=seg;
+    LED_COM &=~com;
+    P3PD |= com;
+
+#else	
     LED_COM &= ~0x1f;
     LED_COM_MASK &= ~0x1f;
     LED_SEG |= 0x7f;			 //ÇåLED COM SEG
@@ -350,7 +360,9 @@ P1HD&=~0x7F;
     LED_SEG &= ~seg;
     LED_COM |= com;
     LED_COM_MASK |= com;
+#endif	
     cnt = (cnt >= 4)?( 0 ): (cnt+1);
+
 #endif	
 }
 #else

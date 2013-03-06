@@ -872,7 +872,6 @@ u8 led_flag;
 /*----------------------------------------------------------------------------*/
 void dled_ctl(u8 flag)
 {
-	led_gpio_init();
 	if(flag>0)
 	{
 		LED_GPIO_CTRL_ON();
@@ -892,6 +891,9 @@ void dled_ctl(u8 flag)
 /*----------------------------------------------------------------------------*/
 void flashled(u8 fre) 
 {
+    led_gpio_init();
+     LED_GPIO_CTRL_OFF();
+
     led_flag =fre;
 }
 
@@ -915,12 +917,12 @@ void disp_dled(void)
 	else if(1 == led_flag)
 	{
 		cnt_led++;			
-		if(cnt_led > 50)
+		if(cnt_led > 100)
 		{
 		    cnt_led = 0;
 		}
 	
-		if(cnt_led > 25)
+		if(cnt_led > 50)
 		{
 		    dled_ctl(1);
 		}
@@ -932,12 +934,12 @@ void disp_dled(void)
 	else if(2 == led_flag)
 	{
 		cnt_led++;			
-		if(cnt_led > 100)
+		if(cnt_led > 200)
 		{
 		    cnt_led = 0;
 		}
 	
-		if(cnt_led > 50)
+		if(cnt_led > 100)
 		{
 		    dled_ctl(1);
 		}
