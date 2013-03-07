@@ -36,6 +36,7 @@ bool vol_change_en;	 ///<音量修改允许位
 extern u8 device_online;
 extern u8 music_type;
 bool rec_device_out;
+bool mic_plugged=0;
 u8 key_100_flag=0;
 
 #ifdef REC_PLAY_BREAK_POINT
@@ -57,6 +58,16 @@ void ap_handle_hotkey(u8 key)
 
     switch (key)
     {
+
+    case MSG_MIC_IN:
+	if(work_mode != IDLE_MODE){
+
+		last_work_mode = work_mode;
+		work_mode =  IDLE_MODE;
+		mic_plugged = 1;
+	       put_msg_lifo(MSG_CHANGE_WORK_MODE);
+	}
+	break;
 
 #if ECHO_ENABLE
     case MSG_REV_SW:
@@ -226,6 +237,11 @@ void ap_handle_hotkey(u8 key)
         break;
 
     case MSG_NEXT_WORKMODE:
+
+
+            if(mic_plugged){	
+		break;
+		}			
         break_encode();
 
 

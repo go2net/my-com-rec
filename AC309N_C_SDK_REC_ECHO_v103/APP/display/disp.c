@@ -859,10 +859,15 @@ void disp_port(u8 menu)
 
 
 u8 led_flag;
+#if 1
 #define led_gpio_init()			P1DIR &= ~(BIT(6));P1PU |= (BIT(6))
 #define LED_GPIO_CTRL_OFF()		P16 = 0
 #define LED_GPIO_CTRL_ON()		P16 = 1
-
+#else
+#define led_gpio_init()			///P1DIR &= ~(BIT(6));P1PU |= (BIT(6))
+#define LED_GPIO_CTRL_OFF()		//P16 = 0
+#define LED_GPIO_CTRL_ON()		//P16
+#endif
 /*----------------------------------------------------------------------------*/
 /**@brief  点LED程序
    @param  1:开下拉	 0：开上拉
