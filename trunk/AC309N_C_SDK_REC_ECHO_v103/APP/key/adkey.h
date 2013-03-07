@@ -11,7 +11,18 @@
 #define _ADKEY_H_
 
 /************ADKEY GROUP 1****************/
-
+#if 1
+#define ADKEY1			0xEA00
+#define ADKEY1_0		0xe000
+#define ADKEY1_1		0xDA00
+#define ADKEY1_2		0xa300
+#define ADKEY1_3		0x8A00
+#define ADKEY1_4		0x7000
+#define ADKEY1_5		0x5600
+#define ADKEY1_6		0x3800
+#define ADKEY1_7		0x2600
+#define ADKEY1_8		0x0B00
+#else
 #define ADKEY1			(0xff40-0xe840)/2+0xe840
 #define ADKEY1_0		(0xe800-0xd1c0)/2+0xd1c0
 #define ADKEY1_1		(0xd140-0xb2c0)/2+0xb2c0
@@ -22,8 +33,8 @@
 #define ADKEY1_6		(0x49c0-0x3740)/2+0x3740
 #define ADKEY1_7		(0x3700-0x1e80)/2+0x1e80
 #define ADKEY1_8		(0x1e40-0x0)/2+0x0
-
-u16 _code adkey1_check_table[] = {ADKEY1_0, ADKEY1_1, ADKEY1_2, ADKEY1_3, ADKEY1_4, ADKEY1_5, ADKEY1_6, ADKEY1_7, ADKEY1_8,};
+#endif
+u16 _code adkey1_check_table[] = { ADKEY1_0,ADKEY1_1, ADKEY1_2, ADKEY1_3, ADKEY1_4, ADKEY1_5, ADKEY1_6, ADKEY1_7, ADKEY1_8,};
 	//case MSG_REV_STRONG_UP:          MSG_DEVICE_MODE
 	//case MSG_REV_STRONG_DOWN:        MSG_DEL_CURR_FILE
     //case MSG_REV_DEEP_UP:

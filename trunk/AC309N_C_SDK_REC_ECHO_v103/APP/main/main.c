@@ -28,7 +28,7 @@ extern u8 eq_mode;
 extern u8 play_mode;
 extern bool iic_busy,vol_change_en; ///<iic繁忙标记
 
-extern bool pc_connect, udisk_connect, sdmmc_connect;
+extern bool pc_connect, udisk_connect, sdmmc_connect,mic_plugged;
 extern u8 _xdata win_buffer[];
 extern u8 _xdata alm_cnt;
 u8 _code one_table[] = {0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4};
@@ -45,6 +45,7 @@ u8  cur_menu;        				///<当前界面
 u8  main_menu_conter;				///<离开主界面的时间
 bool flash_en;						///<显示闪动允许
 u8 bright_counter;
+u8 mic_counter=0;
 
 /*----------------------------------------------------------------------------*/
 /**@brief  Line In检测函数
@@ -391,8 +392,24 @@ void idle_mode(void)
 {
     u8 key;
     input_number_en = 0;
-    vol_change_en=0;
 
+    if(mic_plugged){	
+
+		mic_counter=0;
+    		set_max_vol(MAX_ANOLOG_VOL,MAX_DIGITAL_VOL);///设置最大音量
+		
+		dac_out_select(DAC_MUSIC | DAC_KALAOK, 0);
+		kala_dac();  
+		set_rec_vol(7); 
+		P3HD |=(1<<6);
+		dsp_kalaok_channel();
+		
+    		vol_change_en=1;
+    }
+    else{
+
+    	vol_change_en=0;
+   }
 
  disp_port(MENU_NODEVICE);			
 
@@ -407,9 +424,18 @@ void idle_mode(void)
 	    flush_low_msg();
 	    disp_port(MENU_NODEVICE);			
 		break;
-
+		
+    	case MSG_MIC_OUT:
+		if(mic_plugged){	
+			work_mode =  last_work_mode;
+			mic_plugged = 0;
+			return;
+	      	 	//put_msg_lifo(MSG_CHANGE_WORK_MODE);		
+		}
+		break;
         case MSG_MUSIC_NEW_DEVICE_IN:							//有新设备接入	
         case MSG_CHANGE_WORK_MODE:
+		break;
             work_mode = MUSIC_MODE;
             return;
 
@@ -438,6 +464,7 @@ void idle_mode(void)
             break;
 #endif
         default:
+
             ap_handle_hotkey(key);        
             break;
         }

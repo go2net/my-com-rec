@@ -426,17 +426,31 @@ u8 keyDetect(void)
    @note   0
 */
 /*----------------------------------------------------------------------------*/
+extern bool mic_plugged;
 
 u8 adkey1(u16 key_value)
 {
     u8 i;
-
-    if (key_value > ADKEY1)
+    
+    if (key_value > 0xF300)
     {
+    	 if(!mic_plugged){
+	        put_msg_fifo(MSG_MIC_IN);
+    	 }
         return NO_KEY;
     }
     else
     {
+
+	   if (key_value > 0xD000){
+
+		   if(mic_plugged){
+				//mic_plugged =0;
+			    put_msg_fifo(MSG_MIC_OUT);
+		    }
+		    return NO_KEY;
+	    }
+		 
         for (i = 0; i < 9; i++)
             if (key_value > adkey1_check_table[i])
                 break;
